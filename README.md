@@ -1,14 +1,14 @@
-# Metro TSP Solver (Varatakuni Vihaaram) 🚇
+# Vartakuni Vihāram (వర్తకుని విహారం): A TSP Solver for Metro Networks
 
 **Travel every station, optimize the journey**
 
 A Traveling Salesman Problem (TSP) solver for metro networks that generates optimal routes visiting all stations in a city's transit system. Currently focused on Singapore's MRT/LRT network.
 
-## 🎯 Project Goal
+## Project Goal
 
 Given any starting station in a metro network, calculate the shortest possible route (by time) that visits every station exactly once and returns to the starting point.
 
-## 🚀 Features (Planned)
+## Features (Planned)
 
 - **Multiple TSP Algorithms**: Nearest Neighbor, 2-opt, Simulated Annealing, Genetic Algorithm
 - **Interactive Visualization**: Metro map with route overlay
@@ -16,7 +16,7 @@ Given any starting station in a metro network, calculate the shortest possible r
 - **Walking Network Support**: Model transfers between lines and nearby stations
 - **Static Website**: Deployed via Quarto to GitHub Pages
 
-## 📊 Current Status
+## Current Status
 
 **Phase 1: MVP Development**
 - [x] Project specification complete
@@ -26,10 +26,10 @@ Given any starting station in a metro network, calculate the shortest possible r
 - [ ] Visualization
 - [ ] Quarto site deployment
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-varatakuni_vihaaram/
+vartakuni_vihaaram/
 ├── data/
 │   ├── raw/              # Original data files (stations, connections, lines)
 │   ├── processed/        # Cleaned and validated network data
@@ -57,12 +57,12 @@ varatakuni_vihaaram/
 - **Website**: Quarto
 - **Deployment**: GitHub Pages
 
-## 📦 Installation
+## Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/varatakuni_vihaaram.git
-cd varatakuni_vihaaram
+git clone https://github.com/metamutator/vartakuni_vihaaram.git
+cd vartakuni_vihaaram
 
 # Create virtual environment
 python -m venv venv
@@ -72,7 +72,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## 🚄 Quick Start
+## Quick Start
 
 *(Coming soon after implementation)*
 
@@ -91,12 +91,12 @@ from src.visualization.map import plot_route
 plot_route(network, route)
 ```
 
-## 🗺️ Supported Cities
+## Supported Cities
 
 - **Singapore** (MRT/LRT) - In Progress
 - *(Future cities TBD)*
 
-## 📖 Documentation
+## Documentation
 
 - [Project Specification](PROJECT_SPEC.md) - Comprehensive functional and technical specs
 - [Data Schema](docs/data_schema.md) - *(Coming soon)*
@@ -112,7 +112,7 @@ pytest tests/
 pytest --cov=src tests/
 ```
 
-## 🤝 Contributing
+## Contributing
 
 This is currently a personal hobbyist project. Contributions, ideas, and feedback are welcome!
 
@@ -122,21 +122,15 @@ This is currently a personal hobbyist project. Contributions, ideas, and feedbac
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
+## License
 
 MIT License - See [LICENSE](LICENSE) file for details
 
-## 🙏 Acknowledgments
-
-- Singapore Land Transport Authority (LTA) for transit data
-- NetworkX community for graph algorithms
-- Metro enthusiasts everywhere!
-
-## 📧 Contact
+## Contact
 
 **Akshay R.**  
-Project Link: [https://github.com/YOUR_USERNAME/varatakuni_vihaaram](https://github.com/YOUR_USERNAME/varatakuni_vihaaram)
+Project Link: [https://github.com/metamutator/vartakuni_vihaaram](https://github.com/metamutator/vartakuni_vihaaram)
 
 ---
 
-*"Varatakuni Vihaaram" (వరతకుని విహారం) - Telugu for "Traveler's Journey"*
+*"Vartakuni Vihaaram" (వర్తకుని విహారం) - Telugu for "A Seller's Journey"*
