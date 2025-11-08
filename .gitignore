@@ -1,0 +1,78 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Quarto
+/.quarto/
+_site/
+_freeze/
+
+# Data (selectively ignore)
+data/raw/*.tmp
+data/raw/*.backup
+*.log
+
+# API Keys (if any)
+.env
+secrets.json
+config/secrets.yaml
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Output files (optional - adjust as needed)
+outputs/
+results/*.png
+results/*.html
+
+# Large computed files (keep in Git LFS or ignore)
+data/solutions/*.json.gz
