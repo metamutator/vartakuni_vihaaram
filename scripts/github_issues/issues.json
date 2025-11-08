@@ -1,0 +1,395 @@
+[
+  {
+    "id": "US-101",
+    "title": "US-101: Station Data Collection",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **compile a complete list of all Singapore MRT/LRT stations with metadata**  \nSo that **I can build an accurate network model**\n\n**Acceptance Criteria**\n\n- [ ] CSV file contains all 189+ active/under-construction stations\n- [ ] Each station has: unique ID, name, line code(s), lat/long, operational status\n- [ ] Multi-line stations have separate entries per platform\n- [ ] Data validated against official LTA sources\n\n**Story Points:** 5  \n**Priority:** High\n",
+    "labels": [
+      "data-collection",
+      "phase-1",
+      "epic-1",
+      "priority-high"
+    ],
+    "milestone": "Epic 1: Data Foundation",
+    "story_points": "5",
+    "priority": "High"
+  },
+  {
+    "id": "US-102",
+    "title": "US-102: Inter-Station Travel Time Data",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **collect travel times between all connected stations**  \nSo that **the TSP solver can calculate optimal routes**\n\n**Acceptance Criteria**\n\n- [ ] CSV file contains all direct station connections\n- [ ] Each connection includes: from/to station IDs, travel time (minutes), connection type (train)\n- [ ] Data sourced from official schedules or validated estimates\n- [ ] Bidirectional connections properly represented (undirected graph)\n\n**Story Points:** 13  \n**Priority:** High\n",
+    "labels": [
+      "data-collection",
+      "phase-1",
+      "epic-1",
+      "priority-high"
+    ],
+    "milestone": "Epic 1: Data Foundation",
+    "story_points": "13",
+    "priority": "High"
+  },
+  {
+    "id": "US-103",
+    "title": "US-103: Walking Network Data",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **identify and measure walking connections between stations/platforms**  \nSo that **users can transfer between lines and nearby stations realistically**\n\n**Acceptance Criteria**\n\n- [ ] Transfer times within multi-line stations recorded (platform-to-platform)\n- [ ] Walking connections between nearby stations identified (< 10 min walk)\n- [ ] Walking times sourced from mapping APIs or manual measurement\n- [ ] Connection type labeled as \"walk_transfer\" or \"walk_between_stations\"\n\n**Story Points:** 8  \n**Priority:** Medium\n",
+    "labels": [
+      "data-collection",
+      "phase-1",
+      "epic-1",
+      "priority-medium"
+    ],
+    "milestone": "Epic 1: Data Foundation",
+    "story_points": "8",
+    "priority": "Medium"
+  },
+  {
+    "id": "US-104",
+    "title": "US-104: Line Metadata",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **document metadata for each MRT/LRT line**  \nSo that **visualizations can display correct colors and labels**\n\n**Acceptance Criteria**\n\n- [ ] CSV with line codes, full names, official color codes, line type\n- [ ] Covers all MRT and LRT lines\n- [ ] Colors match official LTA branding\n\n**Story Points:** 2  \n**Priority:** Low\n",
+    "labels": [
+      "data-collection",
+      "phase-1",
+      "epic-1",
+      "priority-low"
+    ],
+    "milestone": "Epic 1: Data Foundation",
+    "story_points": "2",
+    "priority": "Low"
+  },
+  {
+    "id": "US-201",
+    "title": "US-201: Graph Builder Module",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **parse CSV data and construct a NetworkX graph**  \nSo that **I can run graph algorithms on the metro network**\n\n**Acceptance Criteria**\n\n- [ ] Python module reads stations, connections, and lines CSVs\n- [ ] Constructs undirected weighted graph (weight = travel time)\n- [ ] Validates graph connectivity (all stations reachable)\n- [ ] Handles multi-line stations as separate nodes with walking edges\n- [ ] Includes unit tests\n\n**Story Points:** 8  \n**Priority:** High\n",
+    "labels": [
+      "backend",
+      "graph",
+      "phase-1",
+      "epic-2",
+      "priority-high"
+    ],
+    "milestone": "Epic 2: Graph Infrastructure",
+    "story_points": "8",
+    "priority": "High"
+  },
+  {
+    "id": "US-202",
+    "title": "US-202: Data Validation Pipeline",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **validate the metro network data for errors**  \nSo that **the TSP solver doesn't fail due to bad data**\n\n**Acceptance Criteria**\n\n- [ ] Check for disconnected components in graph\n- [ ] Verify all station IDs in connections exist in stations file\n- [ ] Flag missing or negative travel times\n- [ ] Report duplicate connections\n- [ ] Generate validation report\n\n**Story Points:** 5  \n**Priority:** Medium\n",
+    "labels": [
+      "backend",
+      "validation",
+      "phase-1",
+      "epic-2",
+      "priority-medium"
+    ],
+    "milestone": "Epic 2: Graph Infrastructure",
+    "story_points": "5",
+    "priority": "Medium"
+  },
+  {
+    "id": "US-301",
+    "title": "US-301: Nearest Neighbor Heuristic",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **implement a Nearest Neighbor TSP algorithm**  \nSo that **I can quickly generate a baseline solution**\n\n**Acceptance Criteria**\n\n- [ ] Function accepts graph and starting station\n- [ ] Returns tour (ordered list of stations) and total time\n- [ ] Deterministic results\n- [ ] Runs in < 5 seconds for 189 nodes\n- [ ] Unit tested\n\n**Story Points:** 5  \n**Priority:** High\n",
+    "labels": [
+      "algorithm",
+      "phase-1",
+      "epic-3",
+      "priority-high"
+    ],
+    "milestone": "Epic 3: TSP Solver Implementation",
+    "story_points": "5",
+    "priority": "High"
+  },
+  {
+    "id": "US-302",
+    "title": "US-302: 2-Opt Local Search",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **implement 2-opt improvement on TSP tours**  \nSo that **I can optimize solutions from constructive heuristics**\n\n**Acceptance Criteria**\n\n- [ ] Function accepts initial tour and graph\n- [ ] Iteratively improves tour by reversing segments\n- [ ] Configurable iteration limit or convergence threshold\n- [ ] Returns improved tour and time savings\n- [ ] Unit tested\n\n**Story Points:** 8  \n**Priority:** High\n",
+    "labels": [
+      "algorithm",
+      "phase-1",
+      "epic-3",
+      "priority-high"
+    ],
+    "milestone": "Epic 3: TSP Solver Implementation",
+    "story_points": "8",
+    "priority": "High"
+  },
+  {
+    "id": "US-303",
+    "title": "US-303: Simulated Annealing Solver",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **implement Simulated Annealing for TSP**  \nSo that **I can explore more of the solution space**\n\n**Acceptance Criteria**\n\n- [ ] Configurable cooling schedule\n- [ ] Random neighbor generation (2-opt swaps)\n- [ ] Accepts or rejects moves based on SA criteria\n- [ ] Returns best tour found\n- [ ] Benchmarked against other algorithms\n\n**Story Points:** 13  \n**Priority:** Medium\n",
+    "labels": [
+      "algorithm",
+      "phase-1",
+      "epic-3",
+      "priority-medium"
+    ],
+    "milestone": "Epic 3: TSP Solver Implementation",
+    "story_points": "13",
+    "priority": "Medium"
+  },
+  {
+    "id": "US-304",
+    "title": "US-304: Genetic Algorithm Solver (Optional)",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **implement a Genetic Algorithm for TSP**  \nSo that **I can compare population-based optimization**\n\n**Acceptance Criteria**\n\n- [ ] Configurable population size, generations, mutation rate\n- [ ] Crossover operator for TSP tours (e.g., order crossover)\n- [ ] Mutation operator (swap, reverse)\n- [ ] Returns best tour from final population\n\n**Story Points:** 13  \n**Priority:** Low\n",
+    "labels": [
+      "algorithm",
+      "phase-1",
+      "optional",
+      "epic-3",
+      "priority-low"
+    ],
+    "milestone": "Epic 3: TSP Solver Implementation",
+    "story_points": "13",
+    "priority": "Low"
+  },
+  {
+    "id": "US-305",
+    "title": "US-305: Algorithm Comparison Framework",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **run multiple algorithms and compare results**  \nSo that **I can identify the best solver for this problem**\n\n**Acceptance Criteria**\n\n- [ ] Function runs all implemented algorithms on same graph\n- [ ] Records solution quality (tour length) and computation time\n- [ ] Generates comparison table/chart\n- [ ] Saves results to file\n\n**Story Points:** 5  \n**Priority:** Medium\n",
+    "labels": [
+      "algorithm",
+      "analysis",
+      "phase-1",
+      "epic-3",
+      "priority-medium"
+    ],
+    "milestone": "Epic 3: TSP Solver Implementation",
+    "story_points": "5",
+    "priority": "Medium"
+  },
+  {
+    "id": "US-401",
+    "title": "US-401: Research Visualization Libraries",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **evaluate visualization options (Plotly, Folium, Observable)**  \nSo that **I can choose the best tool for metro map display**\n\n**Acceptance Criteria**\n\n- [ ] Create proof-of-concept with each library\n- [ ] Test Quarto integration\n- [ ] Evaluate aesthetics, interactivity, development effort\n- [ ] Document recommendation\n\n**Story Points:** 8  \n**Priority:** High\n",
+    "labels": [
+      "visualization",
+      "research",
+      "phase-1",
+      "epic-4",
+      "priority-high"
+    ],
+    "milestone": "Epic 4: Visualization",
+    "story_points": "8",
+    "priority": "High"
+  },
+  {
+    "id": "US-402",
+    "title": "US-402: Network Map Visualization",
+    "body": "**User Story**\n\nAs a **user**  \nI want to **see a map of the entire MRT/LRT network**  \nSo that **I understand the layout and connections**\n\n**Acceptance Criteria**\n\n- [ ] All stations plotted at geographic coordinates\n- [ ] Lines drawn between connected stations\n- [ ] Color-coded by line (matching official colors)\n- [ ] Station labels visible on hover/click\n- [ ] Zoom and pan enabled\n\n**Story Points:** 13  \n**Priority:** High\n",
+    "labels": [
+      "visualization",
+      "frontend",
+      "phase-1",
+      "epic-4",
+      "priority-high"
+    ],
+    "milestone": "Epic 4: Visualization",
+    "story_points": "13",
+    "priority": "High"
+  },
+  {
+    "id": "US-403",
+    "title": "US-403: Route Overlay Visualization",
+    "body": "**User Story**\n\nAs a **user**  \nI want to **see the optimal route highlighted on the map**  \nSo that **I can understand the path visually**\n\n**Acceptance Criteria**\n\n- [ ] Optimal tour drawn as highlighted path over network\n- [ ] Station sequence indicated (numbers or arrows)\n- [ ] Start/end station clearly marked\n- [ ] Legend shows route vs. network\n\n**Story Points:** 8  \n**Priority:** High\n",
+    "labels": [
+      "visualization",
+      "frontend",
+      "phase-1",
+      "epic-4",
+      "priority-high"
+    ],
+    "milestone": "Epic 4: Visualization",
+    "story_points": "8",
+    "priority": "High"
+  },
+  {
+    "id": "US-404",
+    "title": "US-404: Route Details Panel",
+    "body": "**User Story**\n\nAs a **user**  \nI want to **see a list of stations in order with travel times**  \nSo that **I can follow the route step-by-step**\n\n**Acceptance Criteria**\n\n- [ ] Ordered list of all stations in tour\n- [ ] Cumulative time displayed at each step\n- [ ] Total journey time prominently shown\n- [ ] Algorithm used and computation time noted\n- [ ] Exportable as CSV or text\n\n**Story Points:** 5  \n**Priority:** Medium\n",
+    "labels": [
+      "visualization",
+      "frontend",
+      "phase-1",
+      "epic-4",
+      "priority-medium"
+    ],
+    "milestone": "Epic 4: Visualization",
+    "story_points": "5",
+    "priority": "Medium"
+  },
+  {
+    "id": "US-405",
+    "title": "US-405: Starting Station Selector",
+    "body": "**User Story**\n\nAs a **user**  \nI want to **choose which station to start/end at**  \nSo that **I can plan routes from my preferred location**\n\n**Acceptance Criteria**\n\n- [ ] Dropdown or searchable list of all stations\n- [ ] Selecting station triggers route recalculation/display\n- [ ] Map and route details update accordingly\n- [ ] Performance acceptable (< 3s load time)\n\n**Story Points:** 8  \n**Priority:** High\n",
+    "labels": [
+      "visualization",
+      "frontend",
+      "interaction",
+      "phase-1",
+      "epic-4",
+      "priority-high"
+    ],
+    "milestone": "Epic 4: Visualization",
+    "story_points": "8",
+    "priority": "High"
+  },
+  {
+    "id": "US-501",
+    "title": "US-501: Quarto Document Structure",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **create a Quarto document that integrates Python and visualizations**  \nSo that **I can generate a cohesive website**\n\n**Acceptance Criteria**\n\n- [ ] `.qmd` file with sections: Introduction, Methodology, Interactive Map, Results\n- [ ] Python code cells execute graph building and TSP solving\n- [ ] Visualizations embedded correctly\n- [ ] Renders to HTML without errors\n\n**Story Points:** 8  \n**Priority:** High\n",
+    "labels": [
+      "quarto",
+      "deployment",
+      "phase-1",
+      "epic-5",
+      "priority-high"
+    ],
+    "milestone": "Epic 5: Quarto Integration & Deployment",
+    "story_points": "8",
+    "priority": "High"
+  },
+  {
+    "id": "US-502",
+    "title": "US-502: Pre-computation Pipeline",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **pre-compute optimal routes for all starting stations**  \nSo that **the static site loads quickly**\n\n**Acceptance Criteria**\n\n- [ ] Script iterates through all stations\n- [ ] Runs best-performing algorithm for each\n- [ ] Saves results to JSON/CSV\n- [ ] Quarto document loads pre-computed data\n- [ ] Total computation time < 6 hours\n\n**Story Points:** 8  \n**Priority:** High\n",
+    "labels": [
+      "backend",
+      "deployment",
+      "phase-1",
+      "epic-5",
+      "priority-high"
+    ],
+    "milestone": "Epic 5: Quarto Integration & Deployment",
+    "story_points": "8",
+    "priority": "High"
+  },
+  {
+    "id": "US-503",
+    "title": "US-503: GitHub Pages Deployment",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **deploy the Quarto site to GitHub Pages**  \nSo that **users can access it online**\n\n**Acceptance Criteria**\n\n- [ ] GitHub Actions workflow builds Quarto site\n- [ ] Publishes to `gh-pages` branch\n- [ ] Site accessible at custom URL\n- [ ] Updates automatically on push to main\n\n**Story Points:** 5  \n**Priority:** High\n",
+    "labels": [
+      "deployment",
+      "devops",
+      "phase-1",
+      "epic-5",
+      "priority-high"
+    ],
+    "milestone": "Epic 5: Quarto Integration & Deployment",
+    "story_points": "5",
+    "priority": "High"
+  },
+  {
+    "id": "US-504",
+    "title": "US-504: Documentation & README",
+    "body": "**User Story**\n\nAs a **user/developer**  \nI want to **understand how to use and contribute to the project**  \nSo that **I can explore routes or add new cities**\n\n**Acceptance Criteria**\n\n- [ ] README.md with project description, features, usage instructions\n- [ ] Data schema documentation\n- [ ] Developer setup guide\n- [ ] Contribution guidelines\n- [ ] License file\n\n**Story Points:** 5  \n**Priority:** Medium\n",
+    "labels": [
+      "documentation",
+      "phase-1",
+      "epic-5",
+      "priority-medium"
+    ],
+    "milestone": "Epic 5: Quarto Integration & Deployment",
+    "story_points": "5",
+    "priority": "Medium"
+  },
+  {
+    "id": "US-601",
+    "title": "US-601: Unit Tests for Graph Builder",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **ensure graph construction is correct**  \nSo that **downstream algorithms work properly**\n\n**Acceptance Criteria**\n\n- [ ] Test CSV parsing\n- [ ] Test graph connectivity\n- [ ] Test edge weight assignment\n- [ ] Test multi-line station splitting\n- [ ] Achieve > 90% code coverage\n\n**Story Points:** 5  \n**Priority:** Medium\n",
+    "labels": [
+      "testing",
+      "phase-1",
+      "epic-6",
+      "priority-medium"
+    ],
+    "milestone": "Epic 6: Testing & Validation",
+    "story_points": "5",
+    "priority": "Medium"
+  },
+  {
+    "id": "US-602",
+    "title": "US-602: Algorithm Correctness Tests",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **validate TSP algorithms produce valid tours**  \nSo that **I know solutions are correct**\n\n**Acceptance Criteria**\n\n- [ ] Test on small known graphs (< 10 nodes)\n- [ ] Verify tour visits each node exactly once\n- [ ] Verify tour returns to starting node\n- [ ] Compare against known optimal solutions\n- [ ] Test edge cases (disconnected nodes, single node)\n\n**Story Points:** 8  \n**Priority:** High\n",
+    "labels": [
+      "testing",
+      "algorithm",
+      "phase-1",
+      "epic-6",
+      "priority-high"
+    ],
+    "milestone": "Epic 6: Testing & Validation",
+    "story_points": "8",
+    "priority": "High"
+  },
+  {
+    "id": "US-603",
+    "title": "US-603: End-to-End Workflow Test",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **test the full pipeline from data to visualization**  \nSo that **I catch integration issues**\n\n**Acceptance Criteria**\n\n- [ ] Automated test runs full workflow\n- [ ] Verifies output files generated\n- [ ] Checks visualization renders\n- [ ] Runs in CI/CD pipeline\n\n**Story Points:** 8  \n**Priority:** Medium\n",
+    "labels": [
+      "testing",
+      "integration",
+      "phase-1",
+      "epic-6",
+      "priority-medium"
+    ],
+    "milestone": "Epic 6: Testing & Validation",
+    "story_points": "8",
+    "priority": "Medium"
+  },
+  {
+    "id": "US-701",
+    "title": "US-701: Schedule Integration",
+    "body": "**User Story**\n\nAs a **user**  \nI want to **account for real train schedules and wait times**  \nSo that **routes reflect actual feasible journeys**\n\n**Acceptance Criteria**\n\n\n\n**Story Points:** 21  \n**Priority:** Low\n",
+    "labels": [
+      "phase-2",
+      "enhancement",
+      "epic-7",
+      "priority-low"
+    ],
+    "milestone": "Epic 7: Future Enhancements (Phase 2)",
+    "story_points": "21",
+    "priority": "Low"
+  },
+  {
+    "id": "US-702",
+    "title": "US-702: Multi-City Support",
+    "body": "**User Story**\n\nAs a **user**  \nI want to **solve TSP for other cities' metro networks**  \nSo that **I can explore different systems**\n\n**Acceptance Criteria**\n\n\n\n**Story Points:** 21  \n**Priority:** Low\n",
+    "labels": [
+      "phase-2",
+      "enhancement",
+      "epic-7",
+      "priority-low"
+    ],
+    "milestone": "Epic 7: Future Enhancements (Phase 2)",
+    "story_points": "21",
+    "priority": "Low"
+  },
+  {
+    "id": "US-703",
+    "title": "US-703: OpenStreetMap Automation",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **automatically fetch metro network data from OSM**  \nSo that **I don't have to manually collect data for new cities**\n\n**Acceptance Criteria**\n\n\n\n**Story Points:** 13  \n**Priority:** Low\n",
+    "labels": [
+      "phase-2",
+      "automation",
+      "epic-7",
+      "priority-low"
+    ],
+    "milestone": "Epic 7: Future Enhancements (Phase 2)",
+    "story_points": "13",
+    "priority": "Low"
+  },
+  {
+    "id": "US-704",
+    "title": "US-704: Non-Circular Routes",
+    "body": "**User Story**\n\nAs a **user**  \nI want to **generate routes that don't return to the start**  \nSo that **I have more flexibility in planning**\n\n**Acceptance Criteria**\n\n\n\n**Story Points:** 8  \n**Priority:** Low\n",
+    "labels": [
+      "phase-2",
+      "enhancement",
+      "epic-7",
+      "priority-low"
+    ],
+    "milestone": "Epic 7: Future Enhancements (Phase 2)",
+    "story_points": "8",
+    "priority": "Low"
+  }
+]
