@@ -50,10 +50,10 @@ EWL,East-West Line,#009645,mrt
 
 ## Data Collection Status
 
-- [x] Singapore MRT/LRT stations list (214 entries, 181 unique stations)
-- [x] Geographic coordinates (from sgraildata)
-- [x] Line codes and multi-line station handling
-- [ ] Inter-station travel times (US-102)
+- [x] Singapore MRT/LRT stations list (214 entries, 181 unique stations) - **US-101**
+- [x] Geographic coordinates (from sgraildata) - **US-101**
+- [x] Line codes and multi-line station handling - **US-101**
+- [x] Inter-station travel times (386 connections, estimated) - **US-102**
 - [ ] Walking transfer times (US-103)
 - [ ] Line metadata (colors, names) (US-104)
 
@@ -62,6 +62,10 @@ EWL,East-West Line,#009645,mrt
 ### Raw Data (`raw/`)
 - `sg-rail.geojson` - Original GeoJSON from [sgraildata](https://github.com/cheeaun/sgraildata)
 - `stations.csv` - **214 station entries** with coordinates and line codes
-- `DATA_SOURCE.md` - Complete data source documentation and validation results
+- `connections.csv` - **386 train connections** (193 unique pairs, bidirectional)
+- `DATA_SOURCE.md` - Station data source documentation and validation results
+- `CONNECTIONS_SOURCE.md` - Connection data methodology and limitations
 
-See `DATA_SOURCE.md` for detailed information about data sources, processing, and validation.
+### Important Notes
+
+⚠️ **Travel times in `connections.csv` are ESTIMATED**, not official schedule data. See `CONNECTIONS_SOURCE.md` for methodology and limitations.
