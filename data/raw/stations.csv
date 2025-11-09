@@ -1,0 +1,215 @@
+station_id,station_name,line_code,latitude,longitude,operational_status
+BP1,Choa Chu Kang,BP,1.384749,103.744534,active
+BP10,Fajar,BP,1.38455,103.7708,active
+BP11,Segar,BP,1.387792,103.769593,active
+BP12,Jelapang,BP,1.386683,103.764515,active
+BP13,Senja,BP,1.382678,103.762382,active
+BP2,South View,BP,1.38026,103.745285,active
+BP3,Keat Hong,BP,1.378599,103.74903,active
+BP4,Teck Whye,BP,1.37667,103.753647,active
+BP5,Phoenix,BP,1.378616,103.758008,active
+BP6,Bukit Panjang,BP,1.378296,103.762138,active
+BP7,Petir,BP,1.377756,103.766634,active
+BP8,Pending,BP,1.376184,103.771259,active
+BP9,Bangkit,BP,1.380055,103.772644,active
+CC1,Dhoby Ghaut,CC,1.298786,103.84502,active
+CC10,MacPherson,CC,1.326728,103.890102,active
+CC11,Tai Seng,CC,1.334866,103.88815,active
+CC12,Bartley,CC,1.342438,103.880449,active
+CC13,Serangoon,CC,1.349807,103.873771,active
+CC14,Lorong Chuan,CC,1.351488,103.863395,active
+CC15,Bishan,CC,1.351455,103.848263,active
+CC16,Marymount,CC,1.348614,103.839238,active
+CC17,Caldecott,CC,1.33768,103.839991,active
+CC19,Botanic Gardens,CC,1.322559,103.815747,active
+CC2,Bras Basah,CC,1.296896,103.85055,active
+CC20,Farrer Road,CC,1.317628,103.807785,active
+CC21,Holland Village,CC,1.312117,103.795744,active
+CC22,Buona Vista,CC,1.307263,103.790705,active
+CC23,one-north,CC,1.299607,103.787241,active
+CC24,Kent Ridge,CC,1.293301,103.784413,active
+CC25,Haw Par Villa,CC,1.282654,103.781772,active
+CC26,Pasir Panjang,CC,1.276177,103.791614,active
+CC27,Labrador Park,CC,1.272328,103.802782,active
+CC28,Telok Blangah,CC,1.270586,103.809863,active
+CC29,HarbourFront,CC,1.265391,103.822403,active
+CC3,Esplanade,CC,1.293258,103.855974,active
+CC4,Promenade,CC,1.293854,103.860151,active
+CC5,Nicoll Highway,CC,1.299671,103.8635,active
+CC6,Stadium,CC,1.302946,103.87539,active
+CC7,Mountbatten,CC,1.306249,103.882496,active
+CC8,Dakota,CC,1.308438,103.88832,active
+CC9,Paya Lebar,CC,1.31805,103.892318,active
+CE1,Bayfront,CE,1.282535,103.85973,active
+CE2,Marina Bay,CE,1.275171,103.854751,active
+CG,Tanah Merah,CG,1.327262,103.946513,active
+CG1,Expo,CG,1.33564,103.962238,active
+CG2,Changi Airport,CG,1.357338,103.988565,active
+DT1,Bukit Panjang,DT,1.378296,103.762138,active
+DT10,Stevens,DT,1.320192,103.825461,active
+DT11,Newton,DT,1.31296,103.838864,active
+DT12,Little India,DT,1.306571,103.849299,active
+DT13,Rochor,DT,1.303951,103.852634,active
+DT14,Bugis,DT,1.30053,103.856095,active
+DT15,Promenade,DT,1.293854,103.860151,active
+DT16,Bayfront,DT,1.282535,103.85973,active
+DT17,Downtown,DT,1.279191,103.853345,active
+DT18,Telok Ayer,DT,1.282123,103.848744,active
+DT19,Chinatown,DT,1.28502,103.844003,active
+DT2,Cashew,DT,1.369661,103.764481,active
+DT20,Fort Canning,DT,1.292393,103.844157,active
+DT21,Bencoolen,DT,1.298861,103.850369,active
+DT22,Jalan Besar,DT,1.305125,103.85523,active
+DT23,Bendemeer,DT,1.313583,103.863067,active
+DT24,Geylang Bahru,DT,1.321611,103.871983,active
+DT25,Mattar,DT,1.326969,103.882958,active
+DT26,MacPherson,DT,1.326728,103.890102,active
+DT27,Ubi,DT,1.329763,103.899379,active
+DT28,Kaki Bukit ,DT,1.335024,103.908611,active
+DT29,Bedok North,DT,1.33475,103.918036,active
+DT3,Hillview,DT,1.362451,103.767067,active
+DT30,Bedok Reservoir,DT,1.336284,103.931887,active
+DT31,Tampines West,DT,1.345519,103.93856,active
+DT32,Tampines,DT,1.353374,103.945084,active
+DT33,Tampines East,DT,1.356084,103.954976,active
+DT34,Upper Changi,DT,1.34169,103.961263,active
+DT35,Expo,DT,1.33564,103.962238,active
+DT4,Hume,DT,1.354339,103.769212,active
+DT5,Beauty World,DT,1.341664,103.775936,active
+DT6,King Albert Park,DT,1.33566,103.78416,active
+DT7,Sixth Avenue,DT,1.330591,103.797225,active
+DT8,Tan Kah Kee,DT,1.325701,103.807753,active
+DT9,Botanic Gardens,DT,1.322559,103.815747,active
+EW1,Pasir Ris,EW,1.373031,103.949255,active
+EW10,Kallang,EW,1.311448,103.871339,active
+EW11,Lavender,EW,1.307445,103.86303,active
+EW12,Bugis,EW,1.30053,103.856095,active
+EW13,City Hall,EW,1.293214,103.851835,active
+EW14,Raffles Place,EW,1.284409,103.85147,active
+EW15,Tanjong Pagar,EW,1.276574,103.845884,active
+EW16,Outram Park,EW,1.280685,103.840241,active
+EW17,Tiong Bahru,EW,1.286095,103.827642,active
+EW18,Redhill,EW,1.289653,103.816757,active
+EW19,Queenstown,EW,1.294552,103.806052,active
+EW2,Tampines,EW,1.353374,103.945084,active
+EW20,Commonwealth,EW,1.302443,103.798308,active
+EW21,Buona Vista,EW,1.307263,103.790705,active
+EW22,Dover,EW,1.311421,103.778628,active
+EW23,Clementi,EW,1.3151,103.765231,active
+EW24,Jurong East,EW,1.333115,103.742297,active
+EW25,Chinese Garden,EW,1.34247,103.732594,active
+EW26,Lakeside,EW,1.344303,103.720801,active
+EW27,Boon Lay,EW,1.338472,103.705777,active
+EW28,Pioneer,EW,1.337575,103.697354,active
+EW29,Joo Koon,EW,1.32772,103.678285,active
+EW3,Simei,EW,1.343179,103.953376,active
+EW30,Gul Circle,EW,1.319423,103.660415,active
+EW31,Tuas Crescent,EW,1.320811,103.649575,active
+EW32,Tuas West Road,EW,1.329495,103.640149,active
+EW33,Tuas Link,EW,1.340429,103.636961,active
+EW4,Tanah Merah,EW,1.327262,103.946513,active
+EW5,Bedok,EW,1.323935,103.929995,active
+EW6,Kembangan,EW,1.321055,103.912762,active
+EW7,Eunos,EW,1.319814,103.903058,active
+EW8,Paya Lebar,EW,1.31805,103.892318,active
+EW9,Aljunied,EW,1.316259,103.882665,active
+NE1,HarbourFront,NE,1.265391,103.822403,active
+NE10,Potong Pasir,NE,1.331254,103.869093,active
+NE11,Woodleigh,NE,1.339197,103.870754,active
+NE12,Serangoon,NE,1.349807,103.873771,active
+NE13,Kovan,NE,1.359977,103.884874,active
+NE14,Hougang,NE,1.371904,103.892754,active
+NE15,Buangkok,NE,1.383056,103.89305,active
+NE16,Sengkang,NE,1.39133,103.895294,active
+NE17,Punggol,NE,1.405255,103.902354,active
+NE18,Punggol Coast,NE,1.415018,103.910329,active
+NE3,Outram Park,NE,1.280685,103.840241,active
+NE4,Chinatown,NE,1.28502,103.844003,active
+NE5,Clarke Quay,NE,1.288981,103.846869,active
+NE6,Dhoby Ghaut,NE,1.298786,103.84502,active
+NE7,Little India,NE,1.306571,103.849299,active
+NE8,Farrer Park,NE,1.312708,103.854377,active
+NE9,Boon Keng,NE,1.319824,103.861521,active
+NS1,Jurong East,NS,1.333115,103.742297,active
+NS10,Admiralty,NS,1.440637,103.800959,active
+NS11,Sembawang,NS,1.449093,103.820056,active
+NS12,Canberra,NS,1.443369,103.829502,active
+NS13,Yishun,NS,1.429384,103.835028,active
+NS14,Khatib,NS,1.417316,103.832998,active
+NS15,Yio Chu Kang,NS,1.38178,103.844965,active
+NS16,Ang Mo Kio,NS,1.370053,103.84954,active
+NS17,Bishan,NS,1.351455,103.848263,active
+NS18,Braddell,NS,1.340599,103.846788,active
+NS19,Toa Payoh,NS,1.332297,103.847327,active
+NS2,Bukit Batok,NS,1.349057,103.749591,active
+NS20,Novena,NS,1.320084,103.843492,active
+NS21,Newton,NS,1.31296,103.838864,active
+NS22,Orchard,NS,1.303223,103.831982,active
+NS23,Somerset,NS,1.300328,103.838504,active
+NS24,Dhoby Ghaut,NS,1.298786,103.84502,active
+NS25,City Hall,NS,1.293214,103.851835,active
+NS26,Raffles Place,NS,1.284409,103.85147,active
+NS27,Marina Bay,NS,1.275171,103.854751,active
+NS28,Marina South Pier,NS,1.27175,103.862723,active
+NS3,Bukit Gombak,NS,1.358893,103.751825,active
+NS4,Choa Chu Kang,NS,1.384749,103.744534,active
+NS5,Yew Tee,NS,1.397461,103.747401,active
+NS7,Kranji,NS,1.425219,103.761989,active
+NS8,Marsiling,NS,1.432542,103.774216,active
+NS9,Woodlands,NS,1.437388,103.787675,active
+PE1,Cove,PE,1.399464,103.905852,active
+PE2,Meridian,PE,1.396976,103.908874,active
+PE3,Coral Edge,PE,1.393876,103.912643,active
+PE4,Riviera,PE,1.394581,103.916135,active
+PE5,Kadaloor,PE,1.399601,103.916445,active
+PE6,Oasis,PE,1.402317,103.912684,active
+PE7,Damai,PE,1.405282,103.908556,active
+PTC,Punggol,PTC,1.405255,103.902354,active
+PW1,Sam Kee,PW,1.40975,103.904583,active
+PW2,Teck Lee,PW,1.412705,103.906653,active
+PW3,Punggol Point,PW,1.416845,103.906664,active
+PW4,Samudera,PW,1.415976,103.90219,active
+PW5,Nibong,PW,1.411831,103.900305,active
+PW6,Sumang,PW,1.408532,103.898534,active
+PW7,Soo Teck,PW,1.405394,103.897237,active
+SE1,Compassvale,SE,1.394518,103.900435,active
+SE2,Rumbia,SE,1.391509,103.905937,active
+SE3,Bakau,SE,1.388029,103.905458,active
+SE4,Kangkar,SE,1.383922,103.902202,active
+SE5,Ranggung,SE,1.38403,103.897349,active
+STC,Sengkang,STC,1.39133,103.895294,active
+SW1,Cheng Lim,SW,1.39631,103.893713,active
+SW2,Farmway,SW,1.397191,103.889167,active
+SW3,Kupang,SW,1.398204,103.881244,active
+SW4,Thanggam,SW,1.397434,103.875645,active
+SW5,Fernvale,SW,1.391916,103.876297,active
+SW6,Layar,SW,1.392114,103.880074,active
+SW7,Tongkang,SW,1.389445,103.885807,active
+SW8,Renjong,SW,1.386708,103.890485,active
+TE1,Woodlands North,TE,1.448646,103.785519,active
+TE11,Stevens,TE,1.320192,103.825461,active
+TE12,Napier,TE,1.307087,103.819006,active
+TE13,Orchard Boulevard,TE,1.302406,103.824014,active
+TE14,Orchard,TE,1.303223,103.831982,active
+TE15,Great World,TE,1.294625,103.833483,active
+TE16,Havelock,TE,1.28749,103.833707,active
+TE17,Outram Park,TE,1.280685,103.840241,active
+TE18,Maxwell,TE,1.280685,103.844008,active
+TE19,Shenton Way,TE,1.277661,103.850548,active
+TE2,Woodlands,TE,1.437388,103.787675,active
+TE20,Marina Bay,TE,1.275171,103.854751,active
+TE22,Gardens by the Bay,TE,1.279451,103.868124,active
+TE23,Tanjong Rhu,TE,1.297265,103.873453,active
+TE24,Katong Park,TE,1.297832,103.886179,active
+TE25,Tanjong Katong,TE,1.299319,103.897369,active
+TE26,Marine Parade,TE,1.302612,103.904983,active
+TE27,Marine Terrace,TE,1.306665,103.915107,active
+TE28,Siglap,TE,1.310009,103.930026,active
+TE29,Bayshore,TE,1.313123,103.942308,active
+TE3,Woodlands South,TE,1.427145,103.794295,active
+TE4,Springleaf,TE,1.397771,103.817932,active
+TE5,Lentor,TE,1.384738,103.836626,active
+TE6,Mayflower,TE,1.372151,103.836789,active
+TE7,Bright Hill,TE,1.363449,103.832836,active
+TE8,Upper Thomson,TE,1.354486,103.832819,active
+TE9,Caldecott,TE,1.33768,103.839991,active
