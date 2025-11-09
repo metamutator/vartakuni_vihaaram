@@ -133,9 +133,11 @@ def validate_connections_csv(
     for idx, conn in enumerate(connections, start=2):
         row_id = f"Row {idx} ({conn.get('connection_id', 'UNKNOWN')})"
 
-        # Check for missing values
+        # Check for missing values (line_code can be empty for walking connections)
         for col in expected_columns:
-            if not conn.get(col, '').strip():
+            value = conn.get(col, '').strip()
+            # line_code can be empty for walking connections
+            if not value and not (col == 'line_code' and conn.get('connection_type', '').startswith('walk')):
                 result.add_error(f"{row_id}: Missing value for '{col}'")
 
         # Validate connection_id uniqueness
@@ -185,10 +187,13 @@ def validate_connections_csv(
         except ValueError as e:
             result.add_error(f"{row_id}: Invalid travel_time_minutes value - {e}")
 
-        # Validate distance_meters
+        # Validate distance_meters (can be 0 for walk_transfer at same location)
         try:
             distance = int(conn.get('distance_meters', '0'))
-            if distance <= 0:
+            # Allow 0 distance for walk_transfer (same location platform transfers)
+            if distance < 0:
+                result.add_error(f"{row_id}: Invalid distance_meters: {distance}")
+            elif distance == 0 and conn_type not in ['walk_transfer', 'walk_between_stations']:
                 result.add_error(f"{row_id}: Invalid distance_meters: {distance}")
             elif distance > 5000:
                 result.add_warning(
