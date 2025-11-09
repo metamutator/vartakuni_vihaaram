@@ -56,6 +56,21 @@
     "priority": "Low"
   },
   {
+    "id": "US-105",
+    "title": "US-105: Verify Interchange Station Coordinates",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **verify and update coordinates for interchange stations with physically separated platforms**  \nSo that **the TSP model accurately reflects walking distances between platforms**\n\n**Acceptance Criteria**\n\n- [ ] Identify interchange stations where platforms are physically separated (e.g., Tampines DT/EW requiring fare gate exit)\n- [ ] Source actual platform coordinates from OpenStreetMap or LTA data\n- [ ] Update stations.csv with platform-specific coordinates where applicable\n- [ ] Document stations with significant inter-platform walking distances (>5 min)\n- [ ] Validation script confirms coordinate accuracy\n\n**Story Points:** 5  \n**Priority:** Medium\n\n**Notes:** Some interchange stations like Tampines require tapping out, walking ~10 minutes through external areas (e.g., markets), then re-entering. Current data shows identical coordinates for both platforms, which doesn't reflect this reality.\n",
+    "labels": [
+      "data-collection",
+      "phase-1",
+      "epic-1",
+      "priority-medium",
+      "enhancement"
+    ],
+    "milestone": "Epic 1: Data Foundation",
+    "story_points": "5",
+    "priority": "Medium"
+  },
+  {
     "id": "US-201",
     "title": "US-201: Graph Builder Module",
     "body": "**User Story**\n\nAs a **developer**  \nI want to **parse CSV data and construct a NetworkX graph**  \nSo that **I can run graph algorithms on the metro network**\n\n**Acceptance Criteria**\n\n- [ ] Python module reads stations, connections, and lines CSVs\n- [ ] Constructs undirected weighted graph (weight = travel time)\n- [ ] Validates graph connectivity (all stations reachable)\n- [ ] Handles multi-line stations as separate nodes with walking edges\n- [ ] Includes unit tests\n\n**Story Points:** 8  \n**Priority:** High\n",

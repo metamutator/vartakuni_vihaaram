@@ -103,6 +103,34 @@ So that **visualizations can display correct colors and labels**
 
 ---
 
+## US-105: Verify Interchange Station Coordinates
+
+**Labels:** data-collection, phase-1, epic-1, priority-medium, enhancement
+
+**Milestone:** Epic 1: Data Foundation
+
+**User Story**
+
+As a **developer**  
+I want to **verify and update coordinates for interchange stations with physically separated platforms**  
+So that **the TSP model accurately reflects walking distances between platforms**
+
+**Acceptance Criteria**
+
+- [ ] Identify interchange stations where platforms are physically separated (e.g., Tampines DT/EW requiring fare gate exit)
+- [ ] Source actual platform coordinates from OpenStreetMap or LTA data
+- [ ] Update stations.csv with platform-specific coordinates where applicable
+- [ ] Document stations with significant inter-platform walking distances (>5 min)
+- [ ] Validation script confirms coordinate accuracy
+
+**Story Points:** 5  
+**Priority:** Medium
+
+**Notes:** Some interchange stations like Tampines require tapping out, walking ~10 minutes through external areas (e.g., markets), then re-entering. Current data shows identical coordinates for both platforms, which doesn't reflect this reality.
+
+
+---
+
 ## US-201: Graph Builder Module
 
 **Labels:** backend, graph, phase-1, epic-2, priority-high
