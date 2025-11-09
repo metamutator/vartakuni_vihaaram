@@ -15,22 +15,29 @@ Methodology:
 
 Note: These are ESTIMATED travel times. Official schedule data not publicly available.
 Recommend validation against actual journey times where possible.
+
+Usage:
+    python generate_connections.py
+    python generate_connections.py --mrt-speed 55 --lrt-speed 40
+    python generate_connections.py --dwell-time 0.6
+    python generate_connections.py --mrt-speed 55 --dwell-time 0.4 --output custom_connections.csv
 """
 
 import csv
 import math
+import argparse
 from pathlib import Path
 from typing import List, Dict, Tuple
 from collections import defaultdict
 
-# Average speeds (km/h) including acceleration/deceleration
-AVERAGE_SPEEDS = {
+# Default average speeds (km/h) including acceleration/deceleration
+DEFAULT_AVERAGE_SPEEDS = {
     'MRT': 50.0,  # MRT lines: NS, EW, CC, NE, DT, TE, CE, CG
     'LRT': 35.0,  # LRT lines: BP, SE, SW, PE, PW, STC, PTC
 }
 
-# Dwell time at each station (minutes)
-DWELL_TIME = 0.5  # 30 seconds
+# Default dwell time at each station (minutes)
+DEFAULT_DWELL_TIME = 0.5  # 30 seconds
 
 # Line type mapping
 MRT_LINES = {'NS', 'EW', 'CC', 'NE', 'DT', 'TE', 'CE', 'CR', 'CG'}
@@ -100,31 +107,47 @@ def get_line_type(line_code: str) -> str:
         return 'MRT'
 
 
-def estimate_travel_time(distance_km: float, line_type: str) -> float:
+def estimate_travel_time(
+    distance_km: float,
+    line_type: str,
+    average_speeds: Dict[str, float],
+    dwell_time: float
+) -> float:
     """
     Estimate travel time based on distance and line type.
 
     Args:
         distance_km: Distance between stations in kilometers
         line_type: 'MRT' or 'LRT'
+        average_speeds: Dict with 'MRT' and 'LRT' speeds in km/h
+        dwell_time: Dwell time at station in minutes
 
     Returns:
         Estimated travel time in minutes
     """
-    avg_speed = AVERAGE_SPEEDS[line_type]
+    avg_speed = average_speeds[line_type]
 
     # Time = Distance / Speed (in hours), convert to minutes
     travel_time = (distance_km / avg_speed) * 60
 
     # Add dwell time
-    total_time = travel_time + DWELL_TIME
+    total_time = travel_time + dwell_time
 
     return round(total_time, 2)
 
 
-def build_connections(stations_csv: Path) -> List[Dict]:
+def build_connections(
+    stations_csv: Path,
+    average_speeds: Dict[str, float],
+    dwell_time: float
+) -> List[Dict]:
     """
     Build station connections from stations CSV.
+
+    Args:
+        stations_csv: Path to stations.csv file
+        average_speeds: Dict with 'MRT' and 'LRT' speeds in km/h
+        dwell_time: Dwell time at station in minutes
 
     Strategy:
     1. Group stations by line code
@@ -183,7 +206,7 @@ def build_connections(stations_csv: Path) -> List[Dict]:
                 )
 
                 # Estimate travel time
-                travel_time = estimate_travel_time(distance_km, line_type)
+                travel_time = estimate_travel_time(distance_km, line_type, average_speeds, dwell_time)
 
                 # Create forward connection
                 connections.append({
@@ -246,19 +269,86 @@ def write_connections_csv(connections: List[Dict], output_path: Path):
 
 
 if __name__ == '__main__':
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(
+        description='Generate inter-station connections with estimated travel times',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Use default values (MRT: 50 km/h, LRT: 35 km/h, Dwell: 0.5 min)
+  python generate_connections.py
+
+  # Adjust MRT speed to 55 km/h
+  python generate_connections.py --mrt-speed 55
+
+  # Adjust both speeds and dwell time
+  python generate_connections.py --mrt-speed 55 --lrt-speed 40 --dwell-time 0.4
+
+  # Output to custom file
+  python generate_connections.py --output custom_connections.csv
+        """
+    )
+
+    parser.add_argument(
+        '--mrt-speed',
+        type=float,
+        default=DEFAULT_AVERAGE_SPEEDS['MRT'],
+        help=f"Average MRT speed in km/h (default: {DEFAULT_AVERAGE_SPEEDS['MRT']})"
+    )
+
+    parser.add_argument(
+        '--lrt-speed',
+        type=float,
+        default=DEFAULT_AVERAGE_SPEEDS['LRT'],
+        help=f"Average LRT speed in km/h (default: {DEFAULT_AVERAGE_SPEEDS['LRT']})"
+    )
+
+    parser.add_argument(
+        '--dwell-time',
+        type=float,
+        default=DEFAULT_DWELL_TIME,
+        help=f"Station dwell time in minutes (default: {DEFAULT_DWELL_TIME})"
+    )
+
+    parser.add_argument(
+        '--output',
+        type=str,
+        default=None,
+        help='Output CSV file path (default: data/raw/connections.csv)'
+    )
+
+    args = parser.parse_args()
+
+    # Build average speeds dict from arguments
+    average_speeds = {
+        'MRT': args.mrt_speed,
+        'LRT': args.lrt_speed
+    }
+
     # Define paths
     project_root = Path(__file__).parent.parent
     stations_csv = project_root / 'data' / 'raw' / 'stations.csv'
-    output_csv = project_root / 'data' / 'raw' / 'connections.csv'
+
+    if args.output:
+        output_csv = Path(args.output)
+        if not output_csv.is_absolute():
+            output_csv = project_root / args.output
+    else:
+        output_csv = project_root / 'data' / 'raw' / 'connections.csv'
 
     print("=" * 70)
     print("GENERATING STATION CONNECTIONS")
     print("=" * 70)
     print(f"\nInput: {stations_csv}")
-    print(f"Output: {output_csv}\n")
+    print(f"Output: {output_csv}")
+    print(f"\nParameters:")
+    print(f"  MRT Average Speed: {average_speeds['MRT']} km/h")
+    print(f"  LRT Average Speed: {average_speeds['LRT']} km/h")
+    print(f"  Dwell Time: {args.dwell_time} minutes ({args.dwell_time*60:.0f} seconds)")
+    print()
 
     # Build connections
-    connections = build_connections(stations_csv)
+    connections = build_connections(stations_csv, average_speeds, args.dwell_time)
 
     # Write to CSV
     write_connections_csv(connections, output_csv)
