@@ -37,21 +37,19 @@ So that **I can build an accurate network model**
 
 **User Story**
 
-As a **developer**
-I want to **collect travel times between all connected stations**
+As a **developer**  
+I want to **collect travel times between all connected stations**  
 So that **the TSP solver can calculate optimal routes**
 
 **Acceptance Criteria**
 
-- [x] CSV file contains all direct station connections
-- [x] Each connection includes: from/to station IDs, travel time (minutes), connection type (train)
-- [x] Data sourced from official schedules or validated estimates
-- [x] Bidirectional connections properly represented (undirected graph)
+- [ ] CSV file contains all direct station connections
+- [ ] Each connection includes: from/to station IDs, travel time (minutes), connection type (train)
+- [ ] Data sourced from official schedules or validated estimates
+- [ ] Bidirectional connections properly represented (undirected graph)
 
-**Story Points:** 13
+**Story Points:** 13  
 **Priority:** High
-
-**Status:** ✅ Completed. Generated `connections.csv` with 554 connections (398 train + 156 walking) covering all station pairs (commit c2ccb37). Travel times calculated using distance/speed estimates with methodology documented in `data/raw/CONNECTIONS_SOURCE.md`. Bidirectional connections properly represented.
 
 
 ---
@@ -64,21 +62,19 @@ So that **the TSP solver can calculate optimal routes**
 
 **User Story**
 
-As a **developer**
-I want to **identify and measure walking connections between stations/platforms**
+As a **developer**  
+I want to **identify and measure walking connections between stations/platforms**  
 So that **users can transfer between lines and nearby stations realistically**
 
 **Acceptance Criteria**
 
-- [x] Transfer times within multi-line stations recorded (platform-to-platform)
-- [x] Walking connections between nearby stations identified (< 10 min walk)
-- [x] Walking times sourced from mapping APIs or manual measurement
-- [x] Connection type labeled as "walk_transfer" or "walk_between_stations"
+- [ ] Transfer times within multi-line stations recorded (platform-to-platform)
+- [ ] Walking connections between nearby stations identified (< 10 min walk)
+- [ ] Walking times sourced from mapping APIs or manual measurement
+- [ ] Connection type labeled as "walk_transfer" or "walk_between_stations"
 
-**Story Points:** 8
+**Story Points:** 8  
 **Priority:** Medium
-
-**Status:** ✅ Completed. Added 156 walking connections to `connections.csv` (commit 87d54d5). Includes 72 walk_transfer connections for interchange stations and 84 walk_between_stations for nearby stations. Walking times sourced from Google Maps and documented in `data/raw/WALKING_CONNECTIONS_SOURCE.md`.
 
 
 ---
@@ -91,182 +87,18 @@ So that **users can transfer between lines and nearby stations realistically**
 
 **User Story**
 
-As a **developer**
-I want to **document metadata for each MRT/LRT line**
+As a **developer**  
+I want to **document metadata for each MRT/LRT line**  
 So that **visualizations can display correct colors and labels**
 
 **Acceptance Criteria**
 
-- [x] CSV with line codes, full names, official color codes, line type
-- [x] Covers all MRT and LRT lines
-- [x] Colors match official LTA branding
+- [ ] CSV with line codes, full names, official color codes, line type
+- [ ] Covers all MRT and LRT lines
+- [ ] Colors match official LTA branding
 
-**Story Points:** 2
+**Story Points:** 2  
 **Priority:** Low
-
-**Status:** ✅ Completed. Created `data/raw/lines.csv` with metadata for all 15 lines (commit e2b979a). Includes line codes, full names, official hex color codes matching LTA branding, and line types (MRT/LRT).
-
-
----
-
-## US-105: Verify Interchange Station Coordinates
-
-**Labels:** enhancement, data-collection, phase-1, epic-1, priority-medium
-
-**Milestone:** Epic 1: Data Foundation
-
-**User Story**
-
-As a **developer**  
-I want to **verify and update coordinates for interchange stations with physically separated platforms**  
-So that **the TSP model accurately reflects walking distances between platforms**
-
-**Acceptance Criteria**
-
-- [ ] Identify interchange stations where platforms are physically separated (e.g., Tampines DT/EW requiring fare gate exit)
-- [ ] Source actual platform coordinates from OpenStreetMap or LTA data
-- [ ] Update stations.csv with platform-specific coordinates where applicable
-- [ ] Document stations with significant inter-platform walking distances (>5 min)
-- [ ] Validation script confirms coordinate accuracy
-
-**Story Points:** 5  
-**Priority:** Medium
-
-**Notes:** Some interchange stations like Tampines require tapping out, walking ~10 minutes through external areas (e.g., markets), then re-entering. Current data shows identical coordinates for both platforms, which doesn't reflect this reality.
-
-**Status:** Analysis complete (29 interchanges identified, 2 confirmed separations). See `data/raw/INTERCHANGE_COORDINATE_ANALYSIS.md` for details.
-
-
----
-
-## US-106: Fix Edge Cases in Connection Generation
-
-**Labels:** bug, data-collection, phase-1, epic-1, priority-medium
-
-**Milestone:** Epic 1: Data Foundation
-
-**User Story**
-
-As a **developer**  
-I want to **handle special station code formats in the connection generator**  
-So that **all station connections are properly generated including terminus stations**
-
-**Acceptance Criteria**
-
-- [ ] Connection generator handles station codes without numbers (e.g., CG, STC, PTC)
-- [ ] Terminus and special stations properly connected in connections.csv
-- [ ] Validation script confirms all stations have at least one connection
-- [ ] Unit tests for edge cases
-
-**Story Points:** 3  
-**Priority:** Medium
-
-**Technical Details:** Current issue: Station ID "CG" (Tanah Merah on CG line) not processed by generate_connections.py. Missing connection: CG → CG1 (Tanah Merah to Expo). Similar issues may exist for PTC, STC stations.
-
-**Status:** ✅ Completed. Fixed in PR #33 (commit 1641ce9). Train connections increased from 386 to 388.
-
-
----
-
-## US-107: Travel Time Calibration Based on Field Measurements
-
-**Labels:** enhancement, data-collection, phase-1, epic-1, priority-low
-
-**Milestone:** Epic 1: Data Foundation
-
-**User Story**
-
-As a **developer**  
-I want to **calibrate travel time estimates using real-world measurements**  
-So that **the TSP solver uses accurate travel times for route optimization**
-
-**Acceptance Criteria**
-
-- [ ] Analysis script compares observed vs estimated travel times
-- [ ] Documentation of calibration methodology and findings
-- [ ] Speed/dwell parameters adjusted if error > 15%
-- [ ] Validation report shows <10% average error after calibration
-
-**Story Points:** 3  
-**Priority:** Low
-
-**Technical Details:** Current measurements show 9.14% average absolute error (acceptable). Dwell time parameter (0.5 min) is well-calibrated. Analysis script: scripts/analyze_observations.py. Field data: data/raw/observations.md.
-
-**Status:** ✅ Completed. Analysis script created (commit 626c31d). Parameters validated, no adjustments needed.
-
-
----
-
-## US-108: Fix Disconnected LRT and TE Extension Connections
-
-**Labels:** data-collection, data-fix, phase-1, epic-1, priority-high
-
-**Milestone:** Epic 1: Data Foundation
-
-**User Story**
-
-As a **developer**
-I want to **add missing connections between LRT hub stations and loop stations, and fix TE line gaps**
-So that **the network graph is fully connected and TSP algorithms can traverse all stations**
-
-**Acceptance Criteria**
-
-- [x] Sengkang LRT connected: STC hub ↔ SE1 (East Loop) and STC hub ↔ SW1 (West Loop)
-- [x] Punggol LRT connected: PTC hub ↔ PE1 (East Loop) and PTC hub ↔ PW1 (West Loop)
-- [x] Thomson-East Coast Line connected: TE20 ↔ TE22 (fill TE21 gap or direct connection)
-- [x] All connections bidirectional with appropriate travel times
-- [x] Graph connectivity validation passes (single connected component)
-- [x] Connection type properly labeled (train for LRT loops, appropriate for TE gap)
-
-**Background**
-
-Graph builder (US-201) identified 6 disconnected components:
-1. Main network (179 stations) - ✅ connected
-2. SE (Sengkang East Loop) - 5 stations, disconnected from STC
-3. SW (Sengkang West Loop) - 8 stations, disconnected from STC
-4. PE (Punggol East Loop) - 7 stations, disconnected from PTC
-5. PW (Punggol West Loop) - 7 stations, disconnected from PTC
-6. TE22-TE29 extension - 8 stations, gap between TE20 and TE22
-
-**Technical Details**
-
-Missing connections identified:
-- STC (at NE16 Sengkang) exists with walk_transfer to NE16, but no train connections to SE1/SW1
-- PTC (at NE17 Punggol) exists with walk_transfer to NE17, but no train connections to PE1/PW1
-- TE20 (Marina Bay) exists, TE22 (Gardens by the Bay) exists, but no TE21 or direct link
-
-**Story Points:** 5
-**Priority:** High
-
-**Status:** ✅ Completed. Added missing LRT hub connections and TE line gap connection (commit dce8cee). Network is now fully connected with single component. All 4 LRT loops properly connected to their hub stations, and TE line gap bridged with TE21 station. Graph validation confirms full connectivity.
-
-
----
-
-## US-105: Verify Interchange Station Coordinates
-
-**Labels:** data-collection, phase-1, epic-1, priority-medium, enhancement
-
-**Milestone:** Epic 1: Data Foundation
-
-**User Story**
-
-As a **developer**  
-I want to **verify and update coordinates for interchange stations with physically separated platforms**  
-So that **the TSP model accurately reflects walking distances between platforms**
-
-**Acceptance Criteria**
-
-- [ ] Identify interchange stations where platforms are physically separated (e.g., Tampines DT/EW requiring fare gate exit)
-- [ ] Source actual platform coordinates from OpenStreetMap or LTA data
-- [ ] Update stations.csv with platform-specific coordinates where applicable
-- [ ] Document stations with significant inter-platform walking distances (>5 min)
-- [ ] Validation script confirms coordinate accuracy
-
-**Story Points:** 5  
-**Priority:** Medium
-
-**Notes:** Some interchange stations like Tampines require tapping out, walking ~10 minutes through external areas (e.g., markets), then re-entering. Current data shows identical coordinates for both platforms, which doesn't reflect this reality.
 
 
 ---
@@ -279,22 +111,20 @@ So that **the TSP model accurately reflects walking distances between platforms*
 
 **User Story**
 
-As a **developer**
-I want to **parse CSV data and construct a NetworkX graph**
+As a **developer**  
+I want to **parse CSV data and construct a NetworkX graph**  
 So that **I can run graph algorithms on the metro network**
 
 **Acceptance Criteria**
 
-- [x] Python module reads stations, connections, and lines CSVs
-- [x] Constructs undirected weighted graph (weight = travel time)
-- [x] Validates graph connectivity (all stations reachable)
-- [x] Handles multi-line stations as separate nodes with walking edges
-- [x] Includes unit tests
+- [ ] Python module reads stations, connections, and lines CSVs
+- [ ] Constructs undirected weighted graph (weight = travel time)
+- [ ] Validates graph connectivity (all stations reachable)
+- [ ] Handles multi-line stations as separate nodes with walking edges
+- [ ] Includes unit tests
 
-**Story Points:** 8
+**Story Points:** 8  
 **Priority:** High
-
-**Status:** ✅ Completed. Full implementation in `src/graph/builder.py` with `MetroGraphBuilder` class (commit 61dceba). Comprehensive unit tests with 30+ test cases. Successfully loads 214 stations and 277 connections. Graph is fully connected.
 
 
 ---
@@ -307,22 +137,20 @@ So that **I can run graph algorithms on the metro network**
 
 **User Story**
 
-As a **developer**
-I want to **validate the metro network data for errors**
+As a **developer**  
+I want to **validate the metro network data for errors**  
 So that **the TSP solver doesn't fail due to bad data**
 
 **Acceptance Criteria**
 
-- [x] Check for disconnected components in graph
-- [x] Verify all station IDs in connections exist in stations file
-- [x] Flag missing or negative travel times
-- [x] Report duplicate connections
-- [x] Generate validation report
+- [ ] Check for disconnected components in graph
+- [ ] Verify all station IDs in connections exist in stations file
+- [ ] Flag missing or negative travel times
+- [ ] Report duplicate connections
+- [ ] Generate validation report
 
-**Story Points:** 5
+**Story Points:** 5  
 **Priority:** Medium
-
-**Status:** ✅ Completed. Full validation pipeline in `src/graph/validator.py` with `MetroDataValidator` class (commit 11ad251). Validates all data integrity checks, detects errors, warnings, and info messages. Includes comprehensive unit tests in `tests/test_validator.py`. Working demo in `notebooks/graph_infrastructure_demo.ipynb`.
 
 
 ---
@@ -335,22 +163,16 @@ So that **the TSP solver doesn't fail due to bad data**
 
 **User Story**
 
-As a **developer**
-I want to **implement a Nearest Neighbor TSP algorithm**
+As a **developer**  
+I want to **implement a Nearest Neighbor TSP algorithm**  
 So that **I can quickly generate a baseline solution**
 
 **Acceptance Criteria**
 
-- [x] Function accepts graph and starting station
-- [x] Returns tour (ordered list of stations) and total time
-- [x] Deterministic results
-- [x] Runs in < 5 seconds for 189 nodes
-- [x] Unit tested
 
-**Story Points:** 5
+
+**Story Points:** 5  
 **Priority:** High
-
-**Status:** ✅ Completed. Implemented greedy nearest neighbor TSP algorithm in `src/solvers/nearest_neighbor.py` (commit d98469b). Algorithm visits nearest unvisited station until all visited, then returns to start. Deterministic results, runs in < 0.5s for 214 stations. Comprehensive unit tests with 17 test cases covering functionality, performance, determinism, and edge cases. All tests passing.
 
 
 ---
@@ -369,11 +191,7 @@ So that **I can optimize solutions from constructive heuristics**
 
 **Acceptance Criteria**
 
-- [ ] Function accepts initial tour and graph
-- [ ] Iteratively improves tour by reversing segments
-- [ ] Configurable iteration limit or convergence threshold
-- [ ] Returns improved tour and time savings
-- [ ] Unit tested
+
 
 **Story Points:** 8  
 **Priority:** High

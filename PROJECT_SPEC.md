@@ -457,15 +457,17 @@ line_code, line_name, color_hex, line_type
 **So that** I can quickly generate a baseline solution  
 
 **Acceptance Criteria:**
-- [ ] Function accepts graph and starting station
-- [ ] Returns tour (ordered list of stations) and total time
-- [ ] Deterministic results
-- [ ] Runs in < 5 seconds for 189 nodes
-- [ ] Unit tested
+- [x] Function accepts graph and starting station
+- [x] Returns tour (ordered list of stations) and total time
+- [x] Deterministic results
+- [x] Runs in < 5 seconds for 189 nodes
+- [x] Unit tested
 
 **Story Points:** 5  
 **Priority:** High  
 **Labels:** algorithm, phase-1
+
+**Status:** ✅ Completed. Implemented in commit d98469b and demo added in 8265463. Includes single-start nearest neighbor algorithm with comprehensive unit tests (29 tests). Runs in <1 second for 189 nodes. Multi-start variant and combined NN+2-Opt workflow also implemented.
 
 ---
 
@@ -475,15 +477,17 @@ line_code, line_name, color_hex, line_type
 **So that** I can optimize solutions from constructive heuristics  
 
 **Acceptance Criteria:**
-- [ ] Function accepts initial tour and graph
-- [ ] Iteratively improves tour by reversing segments
-- [ ] Configurable iteration limit or convergence threshold
-- [ ] Returns improved tour and time savings
-- [ ] Unit tested
+- [x] Function accepts initial tour and graph
+- [x] Iteratively improves tour by reversing segments
+- [x] Configurable iteration limit or convergence threshold
+- [x] Returns improved tour and time savings
+- [x] Unit tested
 
 **Story Points:** 8  
 **Priority:** High  
 **Labels:** algorithm, phase-1
+
+**Status:** ✅ Completed. Merged to main in PR #34 (commit 17631e3). Includes standard and fast 2-opt implementations with 25 comprehensive tests. Supports configurable max iterations and improvement thresholds. Integrates seamlessly with NN algorithm. Demo notebook showcases combined workflow.
 
 ---
 

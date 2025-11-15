@@ -16,7 +16,7 @@
   {
     "id": "US-102",
     "title": "US-102: Inter-Station Travel Time Data",
-    "body": "**User Story**\n\nAs a **developer**  \nI want to **collect travel times between all connected stations**  \nSo that **the TSP solver can calculate optimal routes**\n\n**Acceptance Criteria**\n\n- [x] CSV file contains all direct station connections\n- [x] Each connection includes: from/to station IDs, travel time (minutes), connection type (train)\n- [x] Data sourced from official schedules or validated estimates\n- [x] Bidirectional connections properly represented (undirected graph)\n\n**Story Points:** 13  \n**Priority:** High\n\n**Status:** Completed. Generated connections.csv with 554 connections (398 train + 156 walking) covering all station pairs (commit c2ccb37). Travel times calculated using distance/speed estimates with methodology documented in data/raw/CONNECTIONS_SOURCE.md. Bidirectional connections properly represented.\n",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **collect travel times between all connected stations**  \nSo that **the TSP solver can calculate optimal routes**\n\n**Acceptance Criteria**\n\n- [ ] CSV file contains all direct station connections\n- [ ] Each connection includes: from/to station IDs, travel time (minutes), connection type (train)\n- [ ] Data sourced from official schedules or validated estimates\n- [ ] Bidirectional connections properly represented (undirected graph)\n\n**Story Points:** 13  \n**Priority:** High\n",
     "labels": [
       "data-collection",
       "phase-1",
@@ -30,7 +30,7 @@
   {
     "id": "US-103",
     "title": "US-103: Walking Network Data",
-    "body": "**User Story**\n\nAs a **developer**  \nI want to **identify and measure walking connections between stations/platforms**  \nSo that **users can transfer between lines and nearby stations realistically**\n\n**Acceptance Criteria**\n\n- [x] Transfer times within multi-line stations recorded (platform-to-platform)\n- [x] Walking connections between nearby stations identified (< 10 min walk)\n- [x] Walking times sourced from mapping APIs or manual measurement\n- [x] Connection type labeled as \"walk_transfer\" or \"walk_between_stations\"\n\n**Story Points:** 8  \n**Priority:** Medium\n\n**Status:** Completed. Added 156 walking connections to connections.csv (commit 87d54d5). Includes 72 walk_transfer connections for interchange stations and 84 walk_between_stations for nearby stations. Walking times sourced from Google Maps and documented in data/raw/WALKING_CONNECTIONS_SOURCE.md.\n",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **identify and measure walking connections between stations/platforms**  \nSo that **users can transfer between lines and nearby stations realistically**\n\n**Acceptance Criteria**\n\n- [ ] Transfer times within multi-line stations recorded (platform-to-platform)\n- [ ] Walking connections between nearby stations identified (< 10 min walk)\n- [ ] Walking times sourced from mapping APIs or manual measurement\n- [ ] Connection type labeled as \"walk_transfer\" or \"walk_between_stations\"\n\n**Story Points:** 8  \n**Priority:** Medium\n",
     "labels": [
       "data-collection",
       "phase-1",
@@ -44,7 +44,7 @@
   {
     "id": "US-104",
     "title": "US-104: Line Metadata",
-    "body": "**User Story**\n\nAs a **developer**  \nI want to **document metadata for each MRT/LRT line**  \nSo that **visualizations can display correct colors and labels**\n\n**Acceptance Criteria**\n\n- [x] CSV with line codes, full names, official color codes, line type\n- [x] Covers all MRT and LRT lines\n- [x] Colors match official LTA branding\n\n**Story Points:** 2  \n**Priority:** Low\n\n**Status:** Completed. Created data/raw/lines.csv with metadata for all 15 lines (commit e2b979a). Includes line codes, full names, official hex color codes matching LTA branding, and line types (MRT/LRT).\n",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **document metadata for each MRT/LRT line**  \nSo that **visualizations can display correct colors and labels**\n\n**Acceptance Criteria**\n\n- [ ] CSV with line codes, full names, official color codes, line type\n- [ ] Covers all MRT and LRT lines\n- [ ] Colors match official LTA branding\n\n**Story Points:** 2  \n**Priority:** Low\n",
     "labels": [
       "data-collection",
       "phase-1",
@@ -56,69 +56,9 @@
     "priority": "Low"
   },
   {
-    "id": "US-105",
-    "title": "US-105: Verify Interchange Station Coordinates",
-    "body": "**User Story**\n\nAs a **developer**  \nI want to **verify and update coordinates for interchange stations with physically separated platforms**  \nSo that **the TSP model accurately reflects walking distances between platforms**\n\n**Acceptance Criteria**\n\n- [ ] Identify interchange stations where platforms are physically separated (e.g., Tampines DT/EW requiring fare gate exit)\n- [ ] Source actual platform coordinates from OpenStreetMap or LTA data\n- [ ] Update stations.csv with platform-specific coordinates where applicable\n- [ ] Document stations with significant inter-platform walking distances (>5 min)\n- [ ] Validation script confirms coordinate accuracy\n\n**Story Points:** 5  \n**Priority:** Medium\n\n**Notes:** Some interchange stations like Tampines require tapping out, walking ~10 minutes through external areas (e.g., markets), then re-entering. Current data shows identical coordinates for both platforms, which doesn't reflect this reality.\n\n**Status:** Analysis complete (29 interchanges identified, 2 confirmed separations). See data/raw/INTERCHANGE_COORDINATE_ANALYSIS.md for details.\n",
-    "labels": [
-      "enhancement",
-      "data-collection",
-      "phase-1",
-      "epic-1",
-      "priority-medium"
-    ],
-    "milestone": "Epic 1: Data Foundation",
-    "story_points": "5",
-    "priority": "Medium"
-  },
-  {
-    "id": "US-106",
-    "title": "US-106: Fix Edge Cases in Connection Generation",
-    "body": "**User Story**\n\nAs a **developer**  \nI want to **handle special station code formats in the connection generator**  \nSo that **all station connections are properly generated including terminus stations**\n\n**Acceptance Criteria**\n\n- [ ] Connection generator handles station codes without numbers (e.g., CG, STC, PTC)\n- [ ] Terminus and special stations properly connected in connections.csv\n- [ ] Validation script confirms all stations have at least one connection\n- [ ] Unit tests for edge cases\n\n**Story Points:** 3  \n**Priority:** Medium\n\n**Technical Details:** Current issue: Station ID \"CG\" (Tanah Merah on CG line) not processed by generate_connections.py. Missing connection: CG → CG1 (Tanah Merah to Expo). Similar issues may exist for PTC, STC stations.\n\n**Status:** Completed. Fixed in PR #33 (commit 1641ce9). Train connections increased from 386 to 388.\n",
-    "labels": [
-      "bug",
-      "data-collection",
-      "phase-1",
-      "epic-1",
-      "priority-medium"
-    ],
-    "milestone": "Epic 1: Data Foundation",
-    "story_points": "3",
-    "priority": "Medium"
-  },
-  {
-    "id": "US-107",
-    "title": "US-107: Travel Time Calibration Based on Field Measurements",
-    "body": "**User Story**\n\nAs a **developer**  \nI want to **calibrate travel time estimates using real-world measurements**  \nSo that **the TSP solver uses accurate travel times for route optimization**\n\n**Acceptance Criteria**\n\n- [ ] Analysis script compares observed vs estimated travel times\n- [ ] Documentation of calibration methodology and findings\n- [ ] Speed/dwell parameters adjusted if error > 15%\n- [ ] Validation report shows <10% average error after calibration\n\n**Story Points:** 3  \n**Priority:** Low\n\n**Technical Details:** Current measurements show 9.14% average absolute error (acceptable). Dwell time parameter (0.5 min) is well-calibrated. Analysis script: scripts/analyze_observations.py. Field data: data/raw/observations.md.\n\n**Status:** Completed. Analysis script created (commit 626c31d). Parameters validated, no adjustments needed.\n",
-    "labels": [
-      "enhancement",
-      "data-collection",
-      "phase-1",
-      "epic-1",
-      "priority-low"
-    ],
-    "milestone": "Epic 1: Data Foundation",
-    "story_points": "3",
-    "priority": "Low"
-  },
-  {
-    "id": "US-108",
-    "title": "US-108: Fix Disconnected LRT and TE Extension Connections",
-    "body": "**User Story**\n\nAs a **developer**\nI want to **add missing connections between LRT hub stations and loop stations, and fix TE line gaps**\nSo that **the network graph is fully connected and TSP algorithms can traverse all stations**\n\n**Acceptance Criteria**\n\n- [x] Sengkang LRT connected: STC hub ↔ SE1 (East Loop) and STC hub ↔ SW1 (West Loop)\n- [x] Punggol LRT connected: PTC hub ↔ PE1 (East Loop) and PTC hub ↔ PW1 (West Loop)\n- [x] Thomson-East Coast Line connected: TE20 ↔ TE22 (fill TE21 gap or direct connection)\n- [x] All connections bidirectional with appropriate travel times\n- [x] Graph connectivity validation passes (single connected component)\n- [x] Connection type properly labeled (train for LRT loops, appropriate for TE gap)\n\n**Background**\n\nGraph builder (US-201) identified 6 disconnected components:\n1. Main network (179 stations) - ✅ connected\n2. SE (Sengkang East Loop) - 5 stations, disconnected from STC\n3. SW (Sengkang West Loop) - 8 stations, disconnected from STC\n4. PE (Punggol East Loop) - 7 stations, disconnected from PTC\n5. PW (Punggol West Loop) - 7 stations, disconnected from PTC\n6. TE22-TE29 extension - 8 stations, gap between TE20 and TE22\n\n**Technical Details**\n\nMissing connections identified:\n- STC (at NE16 Sengkang) exists with walk_transfer to NE16, but no train connections to SE1/SW1\n- PTC (at NE17 Punggol) exists with walk_transfer to NE17, but no train connections to PE1/PW1\n- TE20 (Marina Bay) exists, TE22 (Gardens by the Bay) exists, but no TE21 or direct link\n\n**Story Points:** 5\n**Priority:** High\n\n**Status:** Completed. Added missing LRT hub connections and TE line gap connection (commit dce8cee). Network is now fully connected with single component. All 4 LRT loops properly connected to their hub stations, and TE line gap bridged with TE21 station. Graph validation confirms full connectivity.\n",
-    "labels": [
-      "data-collection",
-      "data-fix",
-      "phase-1",
-      "epic-1",
-      "priority-high"
-    ],
-    "milestone": "Epic 1: Data Foundation",
-    "story_points": "5",
-    "priority": "High"
-  },
-  {
     "id": "US-201",
     "title": "US-201: Graph Builder Module",
-    "body": "**User Story**\n\nAs a **developer**  \nI want to **parse CSV data and construct a NetworkX graph**  \nSo that **I can run graph algorithms on the metro network**\n\n**Acceptance Criteria**\n\n- [x] Python module reads stations, connections, and lines CSVs\n- [x] Constructs undirected weighted graph (weight = travel time)\n- [x] Validates graph connectivity (all stations reachable)\n- [x] Handles multi-line stations as separate nodes with walking edges\n- [x] Includes unit tests\n\n**Story Points:** 8  \n**Priority:** High\n\n**Status:** Completed. Full implementation in src/graph/builder.py with MetroGraphBuilder class (commit 61dceba). Comprehensive unit tests with 30+ test cases. Successfully loads 214 stations and 277 connections. Graph is fully connected.\n",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **parse CSV data and construct a NetworkX graph**  \nSo that **I can run graph algorithms on the metro network**\n\n**Acceptance Criteria**\n\n- [ ] Python module reads stations, connections, and lines CSVs\n- [ ] Constructs undirected weighted graph (weight = travel time)\n- [ ] Validates graph connectivity (all stations reachable)\n- [ ] Handles multi-line stations as separate nodes with walking edges\n- [ ] Includes unit tests\n\n**Story Points:** 8  \n**Priority:** High\n",
     "labels": [
       "backend",
       "graph",
@@ -133,7 +73,7 @@
   {
     "id": "US-202",
     "title": "US-202: Data Validation Pipeline",
-    "body": "**User Story**\n\nAs a **developer**  \nI want to **validate the metro network data for errors**  \nSo that **the TSP solver doesn't fail due to bad data**\n\n**Acceptance Criteria**\n\n- [x] Check for disconnected components in graph\n- [x] Verify all station IDs in connections exist in stations file\n- [x] Flag missing or negative travel times\n- [x] Report duplicate connections\n- [x] Generate validation report\n\n**Story Points:** 5  \n**Priority:** Medium\n\n**Status:** Completed. Full validation pipeline in src/graph/validator.py with MetroDataValidator class (commit 11ad251). Validates all data integrity checks, detects errors, warnings, and info messages. Includes comprehensive unit tests in tests/test_validator.py. Working demo in notebooks/graph_infrastructure_demo.ipynb.\n",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **validate the metro network data for errors**  \nSo that **the TSP solver doesn't fail due to bad data**\n\n**Acceptance Criteria**\n\n- [ ] Check for disconnected components in graph\n- [ ] Verify all station IDs in connections exist in stations file\n- [ ] Flag missing or negative travel times\n- [ ] Report duplicate connections\n- [ ] Generate validation report\n\n**Story Points:** 5  \n**Priority:** Medium\n",
     "labels": [
       "backend",
       "validation",
@@ -148,7 +88,7 @@
   {
     "id": "US-301",
     "title": "US-301: Nearest Neighbor Heuristic",
-    "body": "**User Story**\n\nAs a **developer**  \nI want to **implement a Nearest Neighbor TSP algorithm**  \nSo that **I can quickly generate a baseline solution**\n\n**Acceptance Criteria**\n\n- [x] Function accepts graph and starting station\n- [x] Returns tour (ordered list of stations) and total time\n- [x] Deterministic results\n- [x] Runs in < 5 seconds for 189 nodes\n- [x] Unit tested\n\n**Story Points:** 5  \n**Priority:** High\n\n**Status:** Completed. Implemented greedy nearest neighbor TSP algorithm in src/solvers/nearest_neighbor.py (commit d98469b). Algorithm visits nearest unvisited station until all visited, then returns to start. Deterministic results, runs in < 0.5s for 214 stations. Comprehensive unit tests with 17 test cases covering functionality, performance, determinism, and edge cases. All tests passing.\n",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **implement a Nearest Neighbor TSP algorithm**  \nSo that **I can quickly generate a baseline solution**\n\n**Acceptance Criteria**\n\n\n\n**Story Points:** 5  \n**Priority:** High\n",
     "labels": [
       "algorithm",
       "phase-1",
@@ -162,7 +102,7 @@
   {
     "id": "US-302",
     "title": "US-302: 2-Opt Local Search",
-    "body": "**User Story**\n\nAs a **developer**  \nI want to **implement 2-opt improvement on TSP tours**  \nSo that **I can optimize solutions from constructive heuristics**\n\n**Acceptance Criteria**\n\n- [ ] Function accepts initial tour and graph\n- [ ] Iteratively improves tour by reversing segments\n- [ ] Configurable iteration limit or convergence threshold\n- [ ] Returns improved tour and time savings\n- [ ] Unit tested\n\n**Story Points:** 8  \n**Priority:** High\n",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **implement 2-opt improvement on TSP tours**  \nSo that **I can optimize solutions from constructive heuristics**\n\n**Acceptance Criteria**\n\n\n\n**Story Points:** 8  \n**Priority:** High\n",
     "labels": [
       "algorithm",
       "phase-1",
