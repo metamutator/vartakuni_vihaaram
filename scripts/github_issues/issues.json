@@ -56,6 +56,66 @@
     "priority": "Low"
   },
   {
+    "id": "US-105",
+    "title": "US-105: Verify Interchange Station Coordinates",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **verify and update coordinates for interchange stations with physically separated platforms**  \nSo that **the TSP model accurately reflects walking distances between platforms**\n\n**Acceptance Criteria**\n\n- [ ] Identify interchange stations where platforms are physically separated (e.g., Tampines DT/EW requiring fare gate exit)\n- [ ] Source actual platform coordinates from OpenStreetMap or LTA data\n- [ ] Update stations.csv with platform-specific coordinates where applicable\n- [ ] Document stations with significant inter-platform walking distances (>5 min)\n- [ ] Validation script confirms coordinate accuracy\n\n**Story Points:** 5  \n**Priority:** Medium\n\n**Notes:** Some interchange stations like Tampines require tapping out, walking ~10 minutes through external areas (e.g., markets), then re-entering. Current data shows identical coordinates for both platforms, which doesn't reflect this reality.\n\n**Status:** Analysis complete (29 interchanges identified, 2 confirmed separations). See data/raw/INTERCHANGE_COORDINATE_ANALYSIS.md for details.\n",
+    "labels": [
+      "enhancement",
+      "data-collection",
+      "phase-1",
+      "epic-1",
+      "priority-medium"
+    ],
+    "milestone": "Epic 1: Data Foundation",
+    "story_points": "5",
+    "priority": "Medium"
+  },
+  {
+    "id": "US-106",
+    "title": "US-106: Fix Edge Cases in Connection Generation",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **handle special station code formats in the connection generator**  \nSo that **all station connections are properly generated including terminus stations**\n\n**Acceptance Criteria**\n\n- [ ] Connection generator handles station codes without numbers (e.g., CG, STC, PTC)\n- [ ] Terminus and special stations properly connected in connections.csv\n- [ ] Validation script confirms all stations have at least one connection\n- [ ] Unit tests for edge cases\n\n**Story Points:** 3  \n**Priority:** Medium\n\n**Technical Details:** Current issue: Station ID \"CG\" (Tanah Merah on CG line) not processed by generate_connections.py. Missing connection: CG → CG1 (Tanah Merah to Expo). Similar issues may exist for PTC, STC stations.\n\n**Status:** Completed. Fixed in PR #33 (commit 1641ce9). Train connections increased from 386 to 388.\n",
+    "labels": [
+      "bug",
+      "data-collection",
+      "phase-1",
+      "epic-1",
+      "priority-medium"
+    ],
+    "milestone": "Epic 1: Data Foundation",
+    "story_points": "3",
+    "priority": "Medium"
+  },
+  {
+    "id": "US-107",
+    "title": "US-107: Travel Time Calibration Based on Field Measurements",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **calibrate travel time estimates using real-world measurements**  \nSo that **the TSP solver uses accurate travel times for route optimization**\n\n**Acceptance Criteria**\n\n- [ ] Analysis script compares observed vs estimated travel times\n- [ ] Documentation of calibration methodology and findings\n- [ ] Speed/dwell parameters adjusted if error > 15%\n- [ ] Validation report shows <10% average error after calibration\n\n**Story Points:** 3  \n**Priority:** Low\n\n**Technical Details:** Current measurements show 9.14% average absolute error (acceptable). Dwell time parameter (0.5 min) is well-calibrated. Analysis script: scripts/analyze_observations.py. Field data: data/raw/observations.md.\n\n**Status:** Completed. Analysis script created (commit 626c31d). Parameters validated, no adjustments needed.\n",
+    "labels": [
+      "enhancement",
+      "data-collection",
+      "phase-1",
+      "epic-1",
+      "priority-low"
+    ],
+    "milestone": "Epic 1: Data Foundation",
+    "story_points": "3",
+    "priority": "Low"
+  },
+  {
+    "id": "US-108",
+    "title": "US-108: Fix Disconnected LRT and TE Extension Connections",
+    "body": "**User Story**\n\nAs a **developer**\nI want to **add missing connections between LRT hub stations and loop stations, and fix TE line gaps**\nSo that **the network graph is fully connected and TSP algorithms can traverse all stations**\n\n**Acceptance Criteria**\n\n- [ ] Sengkang LRT connected: STC hub ↔ SE1 (East Loop) and STC hub ↔ SW1 (West Loop)\n- [ ] Punggol LRT connected: PTC hub ↔ PE1 (East Loop) and PTC hub ↔ PW1 (West Loop)\n- [ ] Thomson-East Coast Line connected: TE20 ↔ TE22 (fill TE21 gap or direct connection)\n- [ ] All connections bidirectional with appropriate travel times\n- [ ] Graph connectivity validation passes (single connected component)\n- [ ] Connection type properly labeled (train for LRT loops, appropriate for TE gap)\n\n**Background**\n\nGraph builder (US-201) identified 6 disconnected components:\n1. Main network (179 stations) - ✅ connected\n2. SE (Sengkang East Loop) - 5 stations, disconnected from STC\n3. SW (Sengkang West Loop) - 8 stations, disconnected from STC\n4. PE (Punggol East Loop) - 7 stations, disconnected from PTC\n5. PW (Punggol West Loop) - 7 stations, disconnected from PTC\n6. TE22-TE29 extension - 8 stations, gap between TE20 and TE22\n\n**Technical Details**\n\nMissing connections identified:\n- STC (at NE16 Sengkang) exists with walk_transfer to NE16, but no train connections to SE1/SW1\n- PTC (at NE17 Punggol) exists with walk_transfer to NE17, but no train connections to PE1/PW1\n- TE20 (Marina Bay) exists, TE22 (Gardens by the Bay) exists, but no TE21 or direct link\n\n**Story Points:** 5\n**Priority:** High\n",
+    "labels": [
+      "data-collection",
+      "data-fix",
+      "phase-1",
+      "epic-1",
+      "priority-high"
+    ],
+    "milestone": "Epic 1: Data Foundation",
+    "story_points": "5",
+    "priority": "High"
+  },
+  {
     "id": "US-201",
     "title": "US-201: Graph Builder Module",
     "body": "**User Story**\n\nAs a **developer**  \nI want to **parse CSV data and construct a NetworkX graph**  \nSo that **I can run graph algorithms on the metro network**\n\n**Acceptance Criteria**\n\n- [ ] Python module reads stations, connections, and lines CSVs\n- [ ] Constructs undirected weighted graph (weight = travel time)\n- [ ] Validates graph connectivity (all stations reachable)\n- [ ] Handles multi-line stations as separate nodes with walking edges\n- [ ] Includes unit tests\n\n**Story Points:** 8  \n**Priority:** High\n",

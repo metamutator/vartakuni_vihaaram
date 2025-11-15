@@ -97,8 +97,96 @@ So that **visualizations can display correct colors and labels**
 - [ ] Covers all MRT and LRT lines
 - [ ] Colors match official LTA branding
 
-**Story Points:** 2
+**Story Points:** 2  
 **Priority:** Low
+
+
+---
+
+## US-105: Verify Interchange Station Coordinates
+
+**Labels:** enhancement, data-collection, phase-1, epic-1, priority-medium
+
+**Milestone:** Epic 1: Data Foundation
+
+**User Story**
+
+As a **developer**  
+I want to **verify and update coordinates for interchange stations with physically separated platforms**  
+So that **the TSP model accurately reflects walking distances between platforms**
+
+**Acceptance Criteria**
+
+- [ ] Identify interchange stations where platforms are physically separated (e.g., Tampines DT/EW requiring fare gate exit)
+- [ ] Source actual platform coordinates from OpenStreetMap or LTA data
+- [ ] Update stations.csv with platform-specific coordinates where applicable
+- [ ] Document stations with significant inter-platform walking distances (>5 min)
+- [ ] Validation script confirms coordinate accuracy
+
+**Story Points:** 5  
+**Priority:** Medium
+
+**Notes:** Some interchange stations like Tampines require tapping out, walking ~10 minutes through external areas (e.g., markets), then re-entering. Current data shows identical coordinates for both platforms, which doesn't reflect this reality.
+
+**Status:** Analysis complete (29 interchanges identified, 2 confirmed separations). See `data/raw/INTERCHANGE_COORDINATE_ANALYSIS.md` for details.
+
+
+---
+
+## US-106: Fix Edge Cases in Connection Generation
+
+**Labels:** bug, data-collection, phase-1, epic-1, priority-medium
+
+**Milestone:** Epic 1: Data Foundation
+
+**User Story**
+
+As a **developer**  
+I want to **handle special station code formats in the connection generator**  
+So that **all station connections are properly generated including terminus stations**
+
+**Acceptance Criteria**
+
+- [ ] Connection generator handles station codes without numbers (e.g., CG, STC, PTC)
+- [ ] Terminus and special stations properly connected in connections.csv
+- [ ] Validation script confirms all stations have at least one connection
+- [ ] Unit tests for edge cases
+
+**Story Points:** 3  
+**Priority:** Medium
+
+**Technical Details:** Current issue: Station ID "CG" (Tanah Merah on CG line) not processed by generate_connections.py. Missing connection: CG → CG1 (Tanah Merah to Expo). Similar issues may exist for PTC, STC stations.
+
+**Status:** ✅ Completed. Fixed in PR #33 (commit 1641ce9). Train connections increased from 386 to 388.
+
+
+---
+
+## US-107: Travel Time Calibration Based on Field Measurements
+
+**Labels:** enhancement, data-collection, phase-1, epic-1, priority-low
+
+**Milestone:** Epic 1: Data Foundation
+
+**User Story**
+
+As a **developer**  
+I want to **calibrate travel time estimates using real-world measurements**  
+So that **the TSP solver uses accurate travel times for route optimization**
+
+**Acceptance Criteria**
+
+- [ ] Analysis script compares observed vs estimated travel times
+- [ ] Documentation of calibration methodology and findings
+- [ ] Speed/dwell parameters adjusted if error > 15%
+- [ ] Validation report shows <10% average error after calibration
+
+**Story Points:** 3  
+**Priority:** Low
+
+**Technical Details:** Current measurements show 9.14% average absolute error (acceptable). Dwell time parameter (0.5 min) is well-calibrated. Analysis script: scripts/analyze_observations.py. Field data: data/raw/observations.md.
+
+**Status:** ✅ Completed. Analysis script created (commit 626c31d). Parameters validated, no adjustments needed.
 
 
 ---
