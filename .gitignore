@@ -76,3 +76,5 @@ results/*.html
 
 # Large computed files (keep in Git LFS or ignore)
 data/solutions/*.json.gz
+# .github/copilot-instructions.md
+# .clinerules

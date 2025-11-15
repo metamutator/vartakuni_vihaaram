@@ -176,8 +176,8 @@ def build_connections(
     lines = defaultdict(list)
     for station_id, info in station_lookup.items():
         line_code, station_num = parse_station_code(station_id)
-        if station_num > 0:  # Skip terminals without numbers
-            lines[line_code].append((station_num, station_id, info))
+        # Include all stations (station_num=0 for terminals like CG, STC, PTC)
+        lines[line_code].append((station_num, station_id, info))
 
     # Sort each line by station number
     for line_code in lines:
@@ -197,8 +197,11 @@ def build_connections(
             station_num1, station_id1, info1 = line_stations[i]
             station_num2, station_id2, info2 = line_stations[i + 1]
 
-            # Only connect if sequential (difference of 1)
-            if station_num2 - station_num1 == 1:
+            # Connect if sequential OR if first station is 0 (terminal) and second is 1
+            is_sequential = (station_num2 - station_num1 == 1)
+            is_terminal_to_first = (station_num1 == 0 and station_num2 == 1)
+            
+            if is_sequential or is_terminal_to_first:
                 # Calculate distance
                 distance_km = haversine_distance(
                     info1['lat'], info1['lon'],

@@ -1,0 +1,16 @@
+line_code,line_name,color_hex,line_type
+NS,North-South Line,#D42E12,mrt
+EW,East-West Line,#009645,mrt
+CC,Circle Line,#FA9E0D,mrt
+NE,North-East Line,#9900AA,mrt
+DT,Downtown Line,#005EC4,mrt
+TE,Thomson-East Coast Line,#9D5B25,mrt
+CE,Circle Line Extension,#FA9E0D,mrt
+CG,Changi Airport Branch Line,#009645,mrt
+BP,Bukit Panjang LRT,#748477,lrt
+SE,Sengkang East Loop,#748477,lrt
+SW,Sengkang West Loop,#748477,lrt
+PE,Punggol East Loop,#748477,lrt
+PW,Punggol West Loop,#748477,lrt
+STC,Sengkang LRT,#748477,lrt
+PTC,Punggol LRT,#748477,lrt

@@ -263,6 +263,28 @@ line_code, line_name, color_hex, line_type
 
 **Decision:** Use multi-node model for accuracy, provide config flag to toggle
 
+#### Decision 4: Metric Closure for TSP Solvers (Epic 3)
+**Problem:** The raw metro graph is sparse, contains branches/leaf termini, and does not generally admit a Hamiltonian cycle using only original train + walking-transfer edges. Greedy constructive heuristics (e.g., Nearest Neighbor) can stall when confined to direct adjacency.
+
+**Decision:** All TSP algorithms (Nearest Neighbor, 2-Opt, Simulated Annealing, Genetic Algorithm) operate on the **metric closure** of the transit graph—a complete graph whose edge weights are shortest-path travel times in the original network.
+
+**Benefits:**
+- Eliminates dead-ends for heuristics by ensuring universal adjacency
+- Normalizes cost evaluation across algorithms
+- Reflects realistic travel time where indirect routing (via transfers) may be faster than direct edges
+- Simplifies integration of local search operators (2-opt always valid)
+
+**Trade-offs:**
+- Returned tour is an ordering of stations under shortest-path distances, not a literal single-pass traversal strictly following original edges without revisits.
+- Some segments in the theoretical tour may correspond to multi-edge paths in the physical network; reconstruction step required for visualization/export.
+
+**Implementation Notes:**
+- Utility `build_metric_closure(graph)` added in `src/utils/metric.py`.
+- Solvers construct / reuse closure internally; future optimization may cache closure on the graph object.
+- Two-Opt reports original graph cost when possible for backward compatibility in tests.
+
+**Future Option:** Provide a configuration toggle for "strict traversal mode" that forces algorithms to work directly on the sparse graph with path-feasibility checks or allows controlled node revisits.
+
 ### 3.5 Data Collection Plan
 
 #### Phase 1: Manual Data Entry (Singapore MRT)
@@ -457,15 +479,17 @@ line_code, line_name, color_hex, line_type
 **So that** I can quickly generate a baseline solution  
 
 **Acceptance Criteria:**
-- [ ] Function accepts graph and starting station
-- [ ] Returns tour (ordered list of stations) and total time
-- [ ] Deterministic results
-- [ ] Runs in < 5 seconds for 189 nodes
-- [ ] Unit tested
+- [x] Function accepts graph and starting station
+- [x] Returns tour (ordered list of stations) and total time
+- [x] Deterministic results
+- [x] Runs in < 5 seconds for 189 nodes
+- [x] Unit tested
 
 **Story Points:** 5  
 **Priority:** High  
 **Labels:** algorithm, phase-1
+
+**Status:** ✅ Completed. Implemented in commit d98469b and demo added in 8265463. Includes single-start nearest neighbor algorithm with comprehensive unit tests (29 tests). Runs in <1 second for 189 nodes. Multi-start variant and combined NN+2-Opt workflow also implemented.
 
 ---
 
@@ -475,15 +499,17 @@ line_code, line_name, color_hex, line_type
 **So that** I can optimize solutions from constructive heuristics  
 
 **Acceptance Criteria:**
-- [ ] Function accepts initial tour and graph
-- [ ] Iteratively improves tour by reversing segments
-- [ ] Configurable iteration limit or convergence threshold
-- [ ] Returns improved tour and time savings
-- [ ] Unit tested
+- [x] Function accepts initial tour and graph
+- [x] Iteratively improves tour by reversing segments
+- [x] Configurable iteration limit or convergence threshold
+- [x] Returns improved tour and time savings
+- [x] Unit tested
 
 **Story Points:** 8  
 **Priority:** High  
 **Labels:** algorithm, phase-1
+
+**Status:** ✅ Completed. Merged to main in PR #34 (commit 17631e3). Includes standard and fast 2-opt implementations with 25 comprehensive tests. Supports configurable max iterations and improvement thresholds. Integrates seamlessly with NN algorithm. Demo notebook showcases combined workflow.
 
 ---
 
@@ -493,15 +519,17 @@ line_code, line_name, color_hex, line_type
 **So that** I can explore more of the solution space  
 
 **Acceptance Criteria:**
-- [ ] Configurable cooling schedule
-- [ ] Random neighbor generation (2-opt swaps)
-- [ ] Accepts or rejects moves based on SA criteria
-- [ ] Returns best tour found
-- [ ] Benchmarked against other algorithms
+- [x] Configurable cooling schedule
+- [x] Random neighbor generation (2-opt swaps)
+- [x] Accepts or rejects moves based on SA criteria
+- [x] Returns best tour found
+- [x] Benchmarked against other algorithms
 
 **Story Points:** 13  
 **Priority:** Medium  
 **Labels:** algorithm, phase-1
+
+**Status:** ✅ Completed. Implemented in commit 027cab5. Probabilistic metaheuristic with three cooling schedules (linear, exponential, logarithmic). Includes adaptive variant for automatic parameter tuning. 30 comprehensive unit tests with 100% coverage. Can escape local optima through probabilistic acceptance. Works with both random and warm starts.
 
 ---
 
@@ -511,14 +539,16 @@ line_code, line_name, color_hex, line_type
 **So that** I can compare population-based optimization  
 
 **Acceptance Criteria:**
-- [ ] Configurable population size, generations, mutation rate
-- [ ] Crossover operator for TSP tours (e.g., order crossover)
-- [ ] Mutation operator (swap, reverse)
-- [ ] Returns best tour from final population
+- [x] Configurable population size, generations, mutation rate
+- [x] Crossover operator for TSP tours (e.g., order crossover)
+- [x] Mutation operator (swap, reverse)
+- [x] Returns best tour from final population
 
 **Story Points:** 13  
 **Priority:** Low  
 **Labels:** algorithm, phase-1, optional
+
+**Status:** ✅ Completed. Implemented in commit 027cab5. Population-based evolutionary metaheuristic with Order Crossover (OX) and Partially Mapped Crossover (PMX). Swap and reverse (2-opt) mutation operators. Tournament and rank selection methods. 31 comprehensive unit tests. Includes adaptive variant with convergence detection and parameter adjustment.
 
 ---
 

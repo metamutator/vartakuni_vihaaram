@@ -1,4 +1,4 @@
-# Copilot Instructions for Vartakuni Vihāram
+# Cline Rules for Vartakuni Vihāram
 
 ## Project Overview
 TSP solver for metro networks, generating optimal routes visiting all stations. Currently focused on Singapore's MRT/LRT network (214 stations, 277 connections). Goal: Calculate shortest cycle visiting every station exactly once.

@@ -103,34 +103,6 @@ So that **visualizations can display correct colors and labels**
 
 ---
 
-## US-105: Verify Interchange Station Coordinates
-
-**Labels:** data-collection, phase-1, epic-1, priority-medium, enhancement
-
-**Milestone:** Epic 1: Data Foundation
-
-**User Story**
-
-As a **developer**  
-I want to **verify and update coordinates for interchange stations with physically separated platforms**  
-So that **the TSP model accurately reflects walking distances between platforms**
-
-**Acceptance Criteria**
-
-- [ ] Identify interchange stations where platforms are physically separated (e.g., Tampines DT/EW requiring fare gate exit)
-- [ ] Source actual platform coordinates from OpenStreetMap or LTA data
-- [ ] Update stations.csv with platform-specific coordinates where applicable
-- [ ] Document stations with significant inter-platform walking distances (>5 min)
-- [ ] Validation script confirms coordinate accuracy
-
-**Story Points:** 5  
-**Priority:** Medium
-
-**Notes:** Some interchange stations like Tampines require tapping out, walking ~10 minutes through external areas (e.g., markets), then re-entering. Current data shows identical coordinates for both platforms, which doesn't reflect this reality.
-
-
----
-
 ## US-201: Graph Builder Module
 
 **Labels:** backend, graph, phase-1, epic-2, priority-high
@@ -197,11 +169,7 @@ So that **I can quickly generate a baseline solution**
 
 **Acceptance Criteria**
 
-- [ ] Function accepts graph and starting station
-- [ ] Returns tour (ordered list of stations) and total time
-- [ ] Deterministic results
-- [ ] Runs in < 5 seconds for 189 nodes
-- [ ] Unit tested
+
 
 **Story Points:** 5  
 **Priority:** High
@@ -223,11 +191,7 @@ So that **I can optimize solutions from constructive heuristics**
 
 **Acceptance Criteria**
 
-- [ ] Function accepts initial tour and graph
-- [ ] Iteratively improves tour by reversing segments
-- [ ] Configurable iteration limit or convergence threshold
-- [ ] Returns improved tour and time savings
-- [ ] Unit tested
+
 
 **Story Points:** 8  
 **Priority:** High
@@ -249,11 +213,7 @@ So that **I can explore more of the solution space**
 
 **Acceptance Criteria**
 
-- [ ] Configurable cooling schedule
-- [ ] Random neighbor generation (2-opt swaps)
-- [ ] Accepts or rejects moves based on SA criteria
-- [ ] Returns best tour found
-- [ ] Benchmarked against other algorithms
+
 
 **Story Points:** 13  
 **Priority:** Medium
@@ -275,10 +235,7 @@ So that **I can compare population-based optimization**
 
 **Acceptance Criteria**
 
-- [ ] Configurable population size, generations, mutation rate
-- [ ] Crossover operator for TSP tours (e.g., order crossover)
-- [ ] Mutation operator (swap, reverse)
-- [ ] Returns best tour from final population
+
 
 **Story Points:** 13  
 **Priority:** Low

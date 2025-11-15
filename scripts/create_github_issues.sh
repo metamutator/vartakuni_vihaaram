@@ -159,11 +159,7 @@ So that **I can quickly generate a baseline solution**
 
 **Acceptance Criteria**
 
-- [ ] Function accepts graph and starting station
-- [ ] Returns tour (ordered list of stations) and total time
-- [ ] Deterministic results
-- [ ] Runs in < 5 seconds for 189 nodes
-- [ ] Unit tested
+
 
 **Story Points:** 5  
 **Priority:** High
@@ -182,11 +178,7 @@ So that **I can optimize solutions from constructive heuristics**
 
 **Acceptance Criteria**
 
-- [ ] Function accepts initial tour and graph
-- [ ] Iteratively improves tour by reversing segments
-- [ ] Configurable iteration limit or convergence threshold
-- [ ] Returns improved tour and time savings
-- [ ] Unit tested
+
 
 **Story Points:** 8  
 **Priority:** High
@@ -205,11 +197,7 @@ So that **I can explore more of the solution space**
 
 **Acceptance Criteria**
 
-- [ ] Configurable cooling schedule
-- [ ] Random neighbor generation (2-opt swaps)
-- [ ] Accepts or rejects moves based on SA criteria
-- [ ] Returns best tour found
-- [ ] Benchmarked against other algorithms
+
 
 **Story Points:** 13  
 **Priority:** Medium
@@ -228,10 +216,7 @@ So that **I can compare population-based optimization**
 
 **Acceptance Criteria**
 
-- [ ] Configurable population size, generations, mutation rate
-- [ ] Crossover operator for TSP tours (e.g., order crossover)
-- [ ] Mutation operator (swap, reverse)
-- [ ] Returns best tour from final population
+
 
 **Story Points:** 13  
 **Priority:** Low
