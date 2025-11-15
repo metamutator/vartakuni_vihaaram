@@ -263,6 +263,28 @@ line_code, line_name, color_hex, line_type
 
 **Decision:** Use multi-node model for accuracy, provide config flag to toggle
 
+#### Decision 4: Metric Closure for TSP Solvers (Epic 3)
+**Problem:** The raw metro graph is sparse, contains branches/leaf termini, and does not generally admit a Hamiltonian cycle using only original train + walking-transfer edges. Greedy constructive heuristics (e.g., Nearest Neighbor) can stall when confined to direct adjacency.
+
+**Decision:** All TSP algorithms (Nearest Neighbor, 2-Opt, Simulated Annealing, Genetic Algorithm) operate on the **metric closure** of the transit graph—a complete graph whose edge weights are shortest-path travel times in the original network.
+
+**Benefits:**
+- Eliminates dead-ends for heuristics by ensuring universal adjacency
+- Normalizes cost evaluation across algorithms
+- Reflects realistic travel time where indirect routing (via transfers) may be faster than direct edges
+- Simplifies integration of local search operators (2-opt always valid)
+
+**Trade-offs:**
+- Returned tour is an ordering of stations under shortest-path distances, not a literal single-pass traversal strictly following original edges without revisits.
+- Some segments in the theoretical tour may correspond to multi-edge paths in the physical network; reconstruction step required for visualization/export.
+
+**Implementation Notes:**
+- Utility `build_metric_closure(graph)` added in `src/utils/metric.py`.
+- Solvers construct / reuse closure internally; future optimization may cache closure on the graph object.
+- Two-Opt reports original graph cost when possible for backward compatibility in tests.
+
+**Future Option:** Provide a configuration toggle for "strict traversal mode" that forces algorithms to work directly on the sparse graph with path-feasibility checks or allows controlled node revisits.
+
 ### 3.5 Data Collection Plan
 
 #### Phase 1: Manual Data Entry (Singapore MRT)

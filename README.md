@@ -10,7 +10,7 @@ Given any starting station in a metro network, calculate the shortest possible r
 
 ## Features (Planned)
 
-- **Multiple TSP Algorithms**: Nearest Neighbor, 2-opt, Simulated Annealing, Genetic Algorithm
+- **Multiple TSP Algorithms**: Nearest Neighbor, 2-opt, Simulated Annealing, Genetic Algorithm (all operate on metric closure)
 - **Interactive Visualization**: Metro map with route overlay
 - **User-Selectable Start Points**: Choose any station as your starting point
 - **Walking Network Support**: Model transfers between lines and nearby stations
@@ -39,7 +39,7 @@ Given any starting station in a metro network, calculate the shortest possible r
 - US-201: Graph builder module ✅
 - US-202: Data validation pipeline (Pending)
 
-**Network Status:** Fully connected graph, ready for TSP algorithms!
+**Network Status:** Fully connected graph, ready for TSP algorithms (metric closure enabled in solvers)!
 
 ## Project Structure
 
@@ -135,6 +135,15 @@ print(f"Network diameter: {stats['diameter']} stations")
 
 **TSP Solvers:** Coming in Epic 3
 **Visualization:** Coming in Epic 4
+
+### Metric Closure Design (Epic 3)
+
+All TSP solvers use the **metric closure** of the transit graph: a complete graph where each edge weight equals the shortest-path travel time between two station nodes (including train travel and walking transfers). This provides:
+- Guaranteed distance between every pair of stations (no dead-ends / leaf branch pitfalls)
+- Consistent cost calculations across heuristics and metaheuristics
+- Better comparability of algorithm performance
+
+The reported tour cost therefore represents a theoretical lower bound under assumed transfer times, not necessarily a physically traversable single continuous ride without revisits. Future work may add a "strict traversal" mode using only original edges.
 
 ## Supported Cities
 

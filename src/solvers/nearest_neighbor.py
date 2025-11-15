@@ -1,8 +1,23 @@
-"""Nearest Neighbor heuristic for TSP initial solution construction."""
+"""Nearest Neighbor heuristic for TSP initial solution construction.
+
+This implementation accounts for the fact that the metro network graph is
+not a complete graph and generally does not admit a Hamiltonian cycle using
+only the original track + walking-transfer edges (leaf branches force
+revisits). For TSP heuristics we therefore operate on the metric closure of
+the original graph: a complete graph whose edge weights are the shortest
+path travel times between stations. The returned tour is an ordering of
+stations (each exactly once) together with its total travel time under the
+shortest-path metric.
+
+NOTE: Validation and cost computation are performed against the metric
+closure, not the sparse original graph. Downstream local search (e.g. 2-opt)
+should likewise use the metric closure for consistency.
+"""
 
 import networkx as nx
 from typing import List, Tuple, Optional, Set
 from ..utils.tour import calculate_tour_cost, validate_tour
+from ..utils.metric import build_metric_closure
 
 
 def nearest_neighbor_tsp(
@@ -62,48 +77,45 @@ def nearest_neighbor_tsp(
             "Graph is not connected - cannot create a tour visiting all stations"
         )
 
+    # Metric closure (complete graph of shortest-path travel times)
+    closure = build_metric_closure(graph)
+    nodes = list(closure.nodes())
+
     # Initialize tour with starting station
     tour = [start_station]
-    unvisited: Set[str] = set(graph.nodes()) - {start_station}
+    unvisited: Set[str] = set(nodes) - {start_station}
     current_station = start_station
 
-    # Build tour by repeatedly visiting nearest unvisited neighbor
+    # Greedily select nearest station using metric closure
     while unvisited:
-        # Find nearest unvisited neighbor
         nearest_station = None
         min_distance = float('inf')
 
-        for neighbor in unvisited:
-            # Check if edge exists
-            if graph.has_edge(current_station, neighbor):
-                distance = graph[current_station][neighbor]['weight']
+        for candidate in unvisited:
+            distance = closure[current_station][candidate]['weight']
+            if distance < min_distance:
+                min_distance = distance
+                nearest_station = candidate
 
-                if distance < min_distance:
-                    min_distance = distance
-                    nearest_station = neighbor
-
-        # If no neighbor found, graph is disconnected
+        # Safety check (should never happen with closure)
         if nearest_station is None:
             raise ValueError(
-                f"No path from {current_station} to remaining stations. "
-                f"Graph may be disconnected."
+                f"Unexpected: could not select next station from {current_station}."
             )
 
-        # Visit nearest neighbor
         tour.append(nearest_station)
         unvisited.remove(nearest_station)
         current_station = nearest_station
 
-    # Calculate total tour cost
-    # Handle single-node case specially (no edges to traverse)
+    # Calculate total tour cost using closure graph
     if len(tour) == 1:
         total_cost = 0.0
     else:
-        total_cost = calculate_tour_cost(tour, graph)
+        total_cost = calculate_tour_cost(tour, closure)
 
-    # Validate result if requested
+    # Validate result against closure (ensures completeness & no duplicates)
     if validate_result and len(tour) > 1:
-        validate_tour(tour, graph, require_complete=True)
+        validate_tour(tour, closure, require_complete=True)
 
     return tour, total_cost
 
@@ -234,7 +246,7 @@ def nearest_neighbor_with_2opt(
 
     if verbose:
         print(f"Initial tour cost: {initial_cost:.2f} minutes")
-        print(f"Optimizing with 2-opt...")
+        print("Optimizing with 2-opt...")
 
     # Improve with 2-opt
     optimized_tour, _, optimized_cost = improve_tour_2opt(
@@ -248,7 +260,7 @@ def nearest_neighbor_with_2opt(
     if verbose:
         improvement = initial_cost - optimized_cost
         pct_improvement = (improvement / initial_cost) * 100
-        print(f"\nFinal Results:")
+        print("\nFinal Results:")
         print(f"  Initial cost: {initial_cost:.2f} minutes")
         print(f"  Optimized cost: {optimized_cost:.2f} minutes")
         print(f"  Improvement: {improvement:.2f} minutes ({pct_improvement:.2f}%)")

@@ -4,6 +4,7 @@ import networkx as nx
 import random
 from typing import List, Tuple, Optional
 from ..utils.tour import calculate_tour_cost, validate_tour, reverse_segment
+from ..utils.metric import build_metric_closure
 
 
 def order_crossover(parent1: List[str], parent2: List[str]) -> List[str]:
@@ -221,8 +222,9 @@ def genetic_algorithm_tsp(
     else:
         raise ValueError(f"Unknown mutation type: {mutation_type}")
 
-    # Initialize population with random tours
-    nodes = list(graph.nodes())
+    # Metric closure for consistent shortest-path distances
+    closure = build_metric_closure(graph)
+    nodes = list(closure.nodes())
     population = []
 
     for _ in range(population_size):
@@ -236,7 +238,7 @@ def genetic_algorithm_tsp(
     best_per_generation = []
 
     if verbose:
-        print(f"Genetic Algorithm Starting:")
+        print("Genetic Algorithm Starting:")
         print(f"  Population size: {population_size}")
         print(f"  Generations: {generations}")
         print(f"  Mutation rate: {mutation_rate}")
@@ -246,7 +248,7 @@ def genetic_algorithm_tsp(
     # Evolution loop
     for generation in range(generations):
         # Evaluate fitness (tour cost) for each individual
-        fitness = [calculate_tour_cost(tour, graph) for tour in population]
+        fitness = [calculate_tour_cost(tour, closure) for tour in population]
 
         # Track best in this generation
         gen_best_idx = min(range(len(fitness)), key=lambda i: fitness[i])
@@ -287,7 +289,7 @@ def genetic_algorithm_tsp(
         population = new_population
 
     if verbose:
-        print(f"\nGenetic Algorithm Complete:")
+        print("\nGenetic Algorithm Complete:")
         print(f"  Best cost: {best_cost:.2f} minutes")
         print(f"  Final average cost: {sum(fitness)/len(fitness):.2f} minutes")
 
@@ -315,7 +317,8 @@ def genetic_algorithm_adaptive(
     import time
 
     # Adaptive parameters based on graph size
-    n = graph.number_of_nodes()
+    closure = build_metric_closure(graph)
+    n = closure.number_of_nodes()
 
     # Scale population with problem size
     population_size = min(100, max(20, n))
@@ -328,7 +331,7 @@ def genetic_algorithm_adaptive(
     generations = total_evaluations // population_size
 
     if verbose:
-        print(f"Adaptive GA parameters:")
+        print("Adaptive GA parameters:")
         print(f"  Graph size: {n} nodes")
         print(f"  Target time: {target_time_seconds}s")
         print(f"  Population size: {population_size}")
@@ -337,7 +340,7 @@ def genetic_algorithm_adaptive(
     start_time = time.time()
 
     result = genetic_algorithm_tsp(
-        graph,
+        closure,
         population_size=population_size,
         generations=generations,
         mutation_rate=0.2,

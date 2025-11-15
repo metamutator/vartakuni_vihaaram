@@ -3,6 +3,7 @@
 import networkx as nx
 from typing import List, Tuple, Optional
 from ..utils.tour import calculate_tour_cost, validate_tour, reverse_segment, calculate_swap_delta
+from ..utils.metric import build_metric_closure
 
 
 def improve_tour_2opt(
@@ -48,11 +49,14 @@ def improve_tour_2opt(
         >>> new <= orig
         True
     """
-    # Validate input
-    validate_tour(tour, graph, require_complete=False)
-
-    # Calculate initial cost
-    original_cost = calculate_tour_cost(tour, graph)
+    # Use metric closure for consistent TSP edge availability
+    closure = build_metric_closure(graph)
+    validate_tour(tour, closure, require_complete=False)
+    # Report original cost using original graph if possible to keep backward compatibility
+    try:
+        original_cost = calculate_tour_cost(tour, graph)
+    except ValueError:
+        original_cost = calculate_tour_cost(tour, closure)
     current_tour = tour.copy()
     current_cost = original_cost
 
@@ -78,7 +82,7 @@ def improve_tour_2opt(
         for i in range(n - 1):
             for j in range(i + 1, n):
                 # Calculate the change in cost from this swap
-                delta = calculate_swap_delta(current_tour, graph, i, j)
+                delta = calculate_swap_delta(current_tour, closure, i, j)
 
                 # If improvement found, apply it
                 if delta < -improvement_threshold:
@@ -137,11 +141,12 @@ def improve_tour_2opt_fast(
     Returns:
         Tuple of (improved_tour, original_cost, improved_cost)
     """
-    # Validate input
-    validate_tour(tour, graph, require_complete=False)
-
-    # Calculate initial cost
-    original_cost = calculate_tour_cost(tour, graph)
+    closure = build_metric_closure(graph)
+    validate_tour(tour, closure, require_complete=False)
+    try:
+        original_cost = calculate_tour_cost(tour, graph)
+    except ValueError:
+        original_cost = calculate_tour_cost(tour, closure)
     current_tour = tour.copy()
     current_cost = original_cost
 
@@ -164,7 +169,7 @@ def improve_tour_2opt_fast(
         for i in range(n - 1):
             for j in range(i + 1, n):
                 # Calculate the change in cost from this swap
-                delta = calculate_swap_delta(current_tour, graph, i, j)
+                delta = calculate_swap_delta(current_tour, closure, i, j)
 
                 # Track best improvement
                 if delta < best_delta:

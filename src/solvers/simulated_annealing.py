@@ -5,6 +5,7 @@ import random
 import math
 from typing import List, Tuple, Optional, Callable
 from ..utils.tour import calculate_tour_cost, validate_tour, reverse_segment
+from ..utils.metric import build_metric_closure
 
 
 def linear_cooling(initial_temp: float, current_iteration: int, max_iterations: int) -> float:
@@ -125,20 +126,19 @@ def simulated_annealing_tsp(
     if random_seed is not None:
         random.seed(random_seed)
 
+    # Metric closure
+    closure = build_metric_closure(graph)
+
     # Generate initial tour if not provided
     if initial_tour is None:
-        # Create random tour
-        nodes = list(graph.nodes())
+        nodes = list(closure.nodes())
         random.shuffle(nodes)
         current_tour = nodes
     else:
         current_tour = initial_tour.copy()
 
-    # Validate initial tour
-    validate_tour(current_tour, graph, require_complete=False)
-
-    # Calculate initial cost
-    current_cost = calculate_tour_cost(current_tour, graph)
+    validate_tour(current_tour, closure, require_complete=False)
+    current_cost = calculate_tour_cost(current_tour, closure)
 
     # Track best solution
     best_tour = current_tour.copy()
@@ -174,7 +174,7 @@ def simulated_annealing_tsp(
 
         # Generate random neighbor
         neighbor_tour, i, j = generate_neighbor_2opt(current_tour)
-        neighbor_cost = calculate_tour_cost(neighbor_tour, graph)
+        neighbor_cost = calculate_tour_cost(neighbor_tour, closure)
 
         # Calculate cost difference
         delta = neighbor_cost - current_cost
@@ -251,11 +251,12 @@ def simulated_annealing_adaptive(
     max_iterations = int(target_time_seconds * 2000)
 
     # Initial temperature based on average edge weight
-    avg_edge_weight = sum(d['weight'] for u, v, d in graph.edges(data=True)) / graph.number_of_edges()
+    closure = build_metric_closure(graph)
+    avg_edge_weight = sum(d['weight'] for u, v, d in closure.edges(data=True)) / closure.number_of_edges()
     initial_temp = avg_edge_weight * n * 0.1  # Heuristic
 
     if verbose:
-        print(f"Adaptive SA parameters:")
+        print("Adaptive SA parameters:")
         print(f"  Graph size: {n} nodes")
         print(f"  Target time: {target_time_seconds}s")
         print(f"  Max iterations: {max_iterations}")
@@ -264,7 +265,7 @@ def simulated_annealing_adaptive(
     start_time = time.time()
 
     result = simulated_annealing_tsp(
-        graph,
+        closure,
         initial_tour=initial_tour,
         initial_temp=initial_temp,
         max_iterations=max_iterations,
