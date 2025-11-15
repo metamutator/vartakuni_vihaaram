@@ -50,12 +50,14 @@ EWL,East-West Line,#009645,mrt
 
 ## Data Collection Status
 
-- [x] Singapore MRT/LRT stations list (214 entries, 181 unique stations) - **US-101**
-- [x] Geographic coordinates (from sgraildata) - **US-101**
-- [x] Line codes and multi-line station handling - **US-101**
-- [x] Inter-station travel times (386 train connections, estimated) - **US-102**
-- [x] Walking transfer times (156 walking connections) - **US-103**
-- [ ] Line metadata (colors, names) (US-104)
+- [x] Singapore MRT/LRT stations list (214 entries, 181 unique stations) - **US-101** ✅
+- [x] Geographic coordinates (from sgraildata) - **US-101** ✅
+- [x] Line codes and multi-line station handling - **US-101** ✅
+- [x] Inter-station travel times (386 train connections, estimated) - **US-102** ✅
+- [x] Walking transfer times (156 walking connections) - **US-103** ✅
+- [x] Line metadata (colors, names) - **US-104** ✅
+
+**Epic 1: Data Foundation - COMPLETE** 🎉
 
 ## Current Files
 
@@ -67,9 +69,11 @@ EWL,East-West Line,#009645,mrt
   - **386 train connections** (193 pairs)
   - **72 walk_transfer connections** (36 pairs, interchange transfers)
   - **84 walk_between_stations connections** (42 pairs, nearby stations)
+- `lines.csv` - **15 MRT/LRT line metadata** with names, colors, types
 - `DATA_SOURCE.md` - Station data source documentation
 - `CONNECTIONS_SOURCE.md` - Train connection methodology and limitations
 - `WALKING_CONNECTIONS_SOURCE.md` - Walking connection documentation
+- `LINES_METADATA_SOURCE.md` - Line metadata documentation
 
 ### Important Notes
 
