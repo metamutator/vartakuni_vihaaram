@@ -37,19 +37,21 @@ So that **I can build an accurate network model**
 
 **User Story**
 
-As a **developer**  
-I want to **collect travel times between all connected stations**  
+As a **developer**
+I want to **collect travel times between all connected stations**
 So that **the TSP solver can calculate optimal routes**
 
 **Acceptance Criteria**
 
-- [ ] CSV file contains all direct station connections
-- [ ] Each connection includes: from/to station IDs, travel time (minutes), connection type (train)
-- [ ] Data sourced from official schedules or validated estimates
-- [ ] Bidirectional connections properly represented (undirected graph)
+- [x] CSV file contains all direct station connections
+- [x] Each connection includes: from/to station IDs, travel time (minutes), connection type (train)
+- [x] Data sourced from official schedules or validated estimates
+- [x] Bidirectional connections properly represented (undirected graph)
 
-**Story Points:** 13  
+**Story Points:** 13
 **Priority:** High
+
+**Status:** ✅ Completed. Generated `connections.csv` with 554 connections (398 train + 156 walking) covering all station pairs (commit c2ccb37). Travel times calculated using distance/speed estimates with methodology documented in `data/raw/CONNECTIONS_SOURCE.md`. Bidirectional connections properly represented.
 
 
 ---
@@ -62,19 +64,21 @@ So that **the TSP solver can calculate optimal routes**
 
 **User Story**
 
-As a **developer**  
-I want to **identify and measure walking connections between stations/platforms**  
+As a **developer**
+I want to **identify and measure walking connections between stations/platforms**
 So that **users can transfer between lines and nearby stations realistically**
 
 **Acceptance Criteria**
 
-- [ ] Transfer times within multi-line stations recorded (platform-to-platform)
-- [ ] Walking connections between nearby stations identified (< 10 min walk)
-- [ ] Walking times sourced from mapping APIs or manual measurement
-- [ ] Connection type labeled as "walk_transfer" or "walk_between_stations"
+- [x] Transfer times within multi-line stations recorded (platform-to-platform)
+- [x] Walking connections between nearby stations identified (< 10 min walk)
+- [x] Walking times sourced from mapping APIs or manual measurement
+- [x] Connection type labeled as "walk_transfer" or "walk_between_stations"
 
-**Story Points:** 8  
+**Story Points:** 8
 **Priority:** Medium
+
+**Status:** ✅ Completed. Added 156 walking connections to `connections.csv` (commit 87d54d5). Includes 72 walk_transfer connections for interchange stations and 84 walk_between_stations for nearby stations. Walking times sourced from Google Maps and documented in `data/raw/WALKING_CONNECTIONS_SOURCE.md`.
 
 
 ---
@@ -87,18 +91,20 @@ So that **users can transfer between lines and nearby stations realistically**
 
 **User Story**
 
-As a **developer**  
-I want to **document metadata for each MRT/LRT line**  
+As a **developer**
+I want to **document metadata for each MRT/LRT line**
 So that **visualizations can display correct colors and labels**
 
 **Acceptance Criteria**
 
-- [ ] CSV with line codes, full names, official color codes, line type
-- [ ] Covers all MRT and LRT lines
-- [ ] Colors match official LTA branding
+- [x] CSV with line codes, full names, official color codes, line type
+- [x] Covers all MRT and LRT lines
+- [x] Colors match official LTA branding
 
-**Story Points:** 2  
+**Story Points:** 2
 **Priority:** Low
+
+**Status:** ✅ Completed. Created `data/raw/lines.csv` with metadata for all 15 lines (commit e2b979a). Includes line codes, full names, official hex color codes matching LTA branding, and line types (MRT/LRT).
 
 
 ---
@@ -205,12 +211,12 @@ So that **the network graph is fully connected and TSP algorithms can traverse a
 
 **Acceptance Criteria**
 
-- [ ] Sengkang LRT connected: STC hub ↔ SE1 (East Loop) and STC hub ↔ SW1 (West Loop)
-- [ ] Punggol LRT connected: PTC hub ↔ PE1 (East Loop) and PTC hub ↔ PW1 (West Loop)
-- [ ] Thomson-East Coast Line connected: TE20 ↔ TE22 (fill TE21 gap or direct connection)
-- [ ] All connections bidirectional with appropriate travel times
-- [ ] Graph connectivity validation passes (single connected component)
-- [ ] Connection type properly labeled (train for LRT loops, appropriate for TE gap)
+- [x] Sengkang LRT connected: STC hub ↔ SE1 (East Loop) and STC hub ↔ SW1 (West Loop)
+- [x] Punggol LRT connected: PTC hub ↔ PE1 (East Loop) and PTC hub ↔ PW1 (West Loop)
+- [x] Thomson-East Coast Line connected: TE20 ↔ TE22 (fill TE21 gap or direct connection)
+- [x] All connections bidirectional with appropriate travel times
+- [x] Graph connectivity validation passes (single connected component)
+- [x] Connection type properly labeled (train for LRT loops, appropriate for TE gap)
 
 **Background**
 
@@ -232,6 +238,8 @@ Missing connections identified:
 **Story Points:** 5
 **Priority:** High
 
+**Status:** ✅ Completed. Added missing LRT hub connections and TE line gap connection (commit dce8cee). Network is now fully connected with single component. All 4 LRT loops properly connected to their hub stations, and TE line gap bridged with TE21 station. Graph validation confirms full connectivity.
+
 
 ---
 
@@ -243,20 +251,22 @@ Missing connections identified:
 
 **User Story**
 
-As a **developer**  
-I want to **parse CSV data and construct a NetworkX graph**  
+As a **developer**
+I want to **parse CSV data and construct a NetworkX graph**
 So that **I can run graph algorithms on the metro network**
 
 **Acceptance Criteria**
 
-- [ ] Python module reads stations, connections, and lines CSVs
-- [ ] Constructs undirected weighted graph (weight = travel time)
-- [ ] Validates graph connectivity (all stations reachable)
-- [ ] Handles multi-line stations as separate nodes with walking edges
-- [ ] Includes unit tests
+- [x] Python module reads stations, connections, and lines CSVs
+- [x] Constructs undirected weighted graph (weight = travel time)
+- [x] Validates graph connectivity (all stations reachable)
+- [x] Handles multi-line stations as separate nodes with walking edges
+- [x] Includes unit tests
 
-**Story Points:** 8  
+**Story Points:** 8
 **Priority:** High
+
+**Status:** ✅ Completed. Full implementation in `src/graph/builder.py` with `MetroGraphBuilder` class (commit 61dceba). Comprehensive unit tests with 30+ test cases. Successfully loads 214 stations and 277 connections. Graph is fully connected.
 
 
 ---
@@ -269,20 +279,22 @@ So that **I can run graph algorithms on the metro network**
 
 **User Story**
 
-As a **developer**  
-I want to **validate the metro network data for errors**  
+As a **developer**
+I want to **validate the metro network data for errors**
 So that **the TSP solver doesn't fail due to bad data**
 
 **Acceptance Criteria**
 
-- [ ] Check for disconnected components in graph
-- [ ] Verify all station IDs in connections exist in stations file
-- [ ] Flag missing or negative travel times
-- [ ] Report duplicate connections
-- [ ] Generate validation report
+- [x] Check for disconnected components in graph
+- [x] Verify all station IDs in connections exist in stations file
+- [x] Flag missing or negative travel times
+- [x] Report duplicate connections
+- [x] Generate validation report
 
-**Story Points:** 5  
+**Story Points:** 5
 **Priority:** Medium
+
+**Status:** ✅ Completed. Full validation pipeline in `src/graph/validator.py` with `MetroDataValidator` class (commit 11ad251). Validates all data integrity checks, detects errors, warnings, and info messages. Includes comprehensive unit tests in `tests/test_validator.py`. Working demo in `notebooks/graph_infrastructure_demo.ipynb`.
 
 
 ---

@@ -265,6 +265,24 @@ class MetroGraphBuilder:
 
         return self.stations[station_id]
 
+    def get_line_info(self, line_code: str) -> Dict:
+        """
+        Get detailed information about a specific line.
+
+        Args:
+            line_code: Line code (e.g., 'NS', 'EW', 'TE')
+
+        Returns:
+            Dictionary with line details (name, color, type)
+
+        Raises:
+            ValueError: If line doesn't exist
+        """
+        if line_code not in self.lines:
+            raise ValueError(f"Line not found: {line_code}")
+
+        return self.lines[line_code]
+
     def get_neighbors(self, station_id: str) -> List[Tuple[str, float]]:
         """
         Get all neighboring stations and their travel times.
