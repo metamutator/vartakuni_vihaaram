@@ -56,15 +56,9 @@ EWL,East-West Line,#009645,mrt
 - [x] Inter-station travel times (386 train connections, estimated) - **US-102** ✅
 - [x] Walking transfer times (156 walking connections) - **US-103** ✅
 - [x] Line metadata (colors, names) - **US-104** ✅
-- [ ] Fix disconnected LRT loops and TE extension - **US-108** ⚠️ PENDING
+- [x] Fix disconnected LRT loops and TE extension - **US-108** ✅
 
-**Epic 1: Data Foundation - IN PROGRESS**
-
-**Known Issues (US-108):**
-- ⚠️ Graph has 6 disconnected components (main network + 5 isolated segments)
-- Missing: STC hub ↔ SE1/SW1 connections (Sengkang LRT loops)
-- Missing: PTC hub ↔ PE1/PW1 connections (Punggol LRT loops)
-- Missing: TE20 ↔ TE22 connection (TE line gap)
+**Epic 1: Data Foundation - COMPLETE** 🎉
 
 ## Current Files
 
@@ -72,8 +66,8 @@ EWL,East-West Line,#009645,mrt
 - `sg-rail.geojson` - Original GeoJSON from [sgraildata](https://github.com/cheeaun/sgraildata)
 - `sg-rail-walks.geojson` - Walking connections GeoJSON from sgraildata
 - `stations.csv` - **214 station entries** with coordinates and line codes
-- `connections.csv` - **542 total connections:**
-  - **386 train connections** (193 pairs)
+- `connections.csv` - **554 total connections:**
+  - **398 train connections** (199 pairs)
   - **72 walk_transfer connections** (36 pairs, interchange transfers)
   - **84 walk_between_stations connections** (42 pairs, nearby stations)
 - `lines.csv` - **15 MRT/LRT line metadata** with names, colors, types
@@ -81,6 +75,7 @@ EWL,East-West Line,#009645,mrt
 - `CONNECTIONS_SOURCE.md` - Train connection methodology and limitations
 - `WALKING_CONNECTIONS_SOURCE.md` - Walking connection documentation
 - `LINES_METADATA_SOURCE.md` - Line metadata documentation
+- `LRT_TE_CONNECTIONS_FIX.md` - LRT hub and TE extension connection fixes (US-108)
 
 ### Important Notes
 

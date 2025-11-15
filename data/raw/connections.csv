@@ -543,3 +543,13 @@ connection_id,from_station_id,to_station_id,connection_type,travel_time_minutes,
 0542,TE14,NS22,walk_transfer,2.0,0,
 0543,NS9,TE2,walk_transfer,2.0,0,
 0544,TE2,NS9,walk_transfer,2.0,0,
+545,STC,SE1,train,1.65,672,SE
+546,SE1,STC,train,1.65,672,SE
+547,STC,SW1,train,1.5,580,SW
+548,SW1,STC,train,1.5,580,SW
+549,PTC,PE1,train,1.79,752,PE
+550,PE1,PTC,train,1.79,752,PE
+551,PTC,PW1,train,1.46,557,PW
+552,PW1,PTC,train,1.46,557,PW
+553,TE20,TE22,train,2.37,1560,TE
+554,TE22,TE20,train,2.37,1560,TE
