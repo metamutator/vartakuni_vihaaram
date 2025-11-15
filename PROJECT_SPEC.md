@@ -497,15 +497,17 @@ line_code, line_name, color_hex, line_type
 **So that** I can explore more of the solution space  
 
 **Acceptance Criteria:**
-- [ ] Configurable cooling schedule
-- [ ] Random neighbor generation (2-opt swaps)
-- [ ] Accepts or rejects moves based on SA criteria
-- [ ] Returns best tour found
-- [ ] Benchmarked against other algorithms
+- [x] Configurable cooling schedule
+- [x] Random neighbor generation (2-opt swaps)
+- [x] Accepts or rejects moves based on SA criteria
+- [x] Returns best tour found
+- [x] Benchmarked against other algorithms
 
 **Story Points:** 13  
 **Priority:** Medium  
 **Labels:** algorithm, phase-1
+
+**Status:** ✅ Completed. Implemented in commit 027cab5. Probabilistic metaheuristic with three cooling schedules (linear, exponential, logarithmic). Includes adaptive variant for automatic parameter tuning. 30 comprehensive unit tests with 100% coverage. Can escape local optima through probabilistic acceptance. Works with both random and warm starts.
 
 ---
 
@@ -515,14 +517,16 @@ line_code, line_name, color_hex, line_type
 **So that** I can compare population-based optimization  
 
 **Acceptance Criteria:**
-- [ ] Configurable population size, generations, mutation rate
-- [ ] Crossover operator for TSP tours (e.g., order crossover)
-- [ ] Mutation operator (swap, reverse)
-- [ ] Returns best tour from final population
+- [x] Configurable population size, generations, mutation rate
+- [x] Crossover operator for TSP tours (e.g., order crossover)
+- [x] Mutation operator (swap, reverse)
+- [x] Returns best tour from final population
 
 **Story Points:** 13  
 **Priority:** Low  
 **Labels:** algorithm, phase-1, optional
+
+**Status:** ✅ Completed. Implemented in commit 027cab5. Population-based evolutionary metaheuristic with Order Crossover (OX) and Partially Mapped Crossover (PMX). Swap and reverse (2-opt) mutation operators. Tournament and rank selection methods. 31 comprehensive unit tests. Includes adaptive variant with convergence detection and parameter adjustment.
 
 ---
 

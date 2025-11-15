@@ -213,11 +213,7 @@ So that **I can explore more of the solution space**
 
 **Acceptance Criteria**
 
-- [ ] Configurable cooling schedule
-- [ ] Random neighbor generation (2-opt swaps)
-- [ ] Accepts or rejects moves based on SA criteria
-- [ ] Returns best tour found
-- [ ] Benchmarked against other algorithms
+
 
 **Story Points:** 13  
 **Priority:** Medium
@@ -239,10 +235,7 @@ So that **I can compare population-based optimization**
 
 **Acceptance Criteria**
 
-- [ ] Configurable population size, generations, mutation rate
-- [ ] Crossover operator for TSP tours (e.g., order crossover)
-- [ ] Mutation operator (swap, reverse)
-- [ ] Returns best tour from final population
+
 
 **Story Points:** 13  
 **Priority:** Low

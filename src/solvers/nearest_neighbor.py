@@ -1,167 +1,256 @@
-#!/usr/bin/env python3
-"""
-Nearest Neighbor Heuristic for TSP (US-301)
+"""Nearest Neighbor heuristic for TSP initial solution construction."""
 
-Implements a greedy nearest neighbor algorithm to generate baseline TSP solutions.
-Always visits the nearest unvisited station until all stations are visited.
-"""
-
-import time
-from typing import List, Tuple, Set
 import networkx as nx
+from typing import List, Tuple, Optional, Set
+from ..utils.tour import calculate_tour_cost, validate_tour
 
 
 def nearest_neighbor_tsp(
     graph: nx.Graph,
-    start_station: str
+    start_station: Optional[str] = None,
+    validate_result: bool = True
 ) -> Tuple[List[str], float]:
     """
-    Solve TSP using Nearest Neighbor heuristic.
+    Construct a TSP tour using the Nearest Neighbor greedy heuristic.
 
-    Algorithm:
-    1. Start at the given station
-    2. Repeatedly visit the nearest unvisited neighbor
-    3. Return to starting station when all nodes are visited
+    The algorithm starts at a given station and repeatedly visits the nearest
+    unvisited station until all stations have been visited, then returns to
+    the starting station.
+
+    This is a constructive heuristic that quickly generates a reasonable
+    (though not optimal) initial solution that can be improved with local
+    search methods like 2-opt.
 
     Args:
-        graph: NetworkX graph with stations as nodes and 'weight' attribute on edges
-        start_station: Station ID to start the tour
+        graph: NetworkX graph with edge weights (travel times)
+        start_station: Starting station ID. If None, uses first node in graph.
+        validate_result: Whether to validate the resulting tour
 
     Returns:
-        Tuple of (tour, total_time):
-        - tour: Ordered list of station IDs forming the complete tour
-        - total_time: Total travel time in minutes
+        Tuple of (tour, total_cost)
+        - tour: Ordered list of station IDs
+        - total_cost: Total travel time in minutes
 
     Raises:
-        ValueError: If start_station not in graph or graph is empty
+        ValueError: If graph is empty or start_station is invalid
+        ValueError: If graph is not connected (no valid tour possible)
 
-    Time Complexity: O(n^2) where n is number of stations
-    Space Complexity: O(n)
+    Example:
+        >>> G = nx.Graph()
+        >>> G.add_edge('A', 'B', weight=1.0)
+        >>> G.add_edge('B', 'C', weight=2.0)
+        >>> G.add_edge('C', 'A', weight=3.0)
+        >>> tour, cost = nearest_neighbor_tsp(G, start_station='A')
+        >>> len(tour)
+        3
+        >>> set(tour) == {'A', 'B', 'C'}
+        True
     """
-    # Validate inputs
-    if not graph or graph.number_of_nodes() == 0:
+    # Validate graph
+    if graph.number_of_nodes() == 0:
         raise ValueError("Graph is empty")
 
-    if start_station not in graph:
-        raise ValueError(f"Start station '{start_station}' not found in graph")
+    # Set starting station
+    if start_station is None:
+        start_station = list(graph.nodes())[0]
+    elif start_station not in graph.nodes():
+        raise ValueError(f"Start station '{start_station}' not in graph")
 
-    # Initialize
+    # Check if graph is connected
+    if not nx.is_connected(graph):
+        raise ValueError(
+            "Graph is not connected - cannot create a tour visiting all stations"
+        )
+
+    # Initialize tour with starting station
     tour = [start_station]
-    visited: Set[str] = {start_station}
+    unvisited: Set[str] = set(graph.nodes()) - {start_station}
     current_station = start_station
-    total_time = 0.0
 
-    # Greedy nearest neighbor selection
-    num_stations = graph.number_of_nodes()
-
-    while len(visited) < num_stations:
+    # Build tour by repeatedly visiting nearest unvisited neighbor
+    while unvisited:
         # Find nearest unvisited neighbor
         nearest_station = None
-        min_time = float('inf')
+        min_distance = float('inf')
 
-        for neighbor in graph.neighbors(current_station):
-            if neighbor not in visited:
-                edge_data = graph[current_station][neighbor]
-                travel_time = edge_data.get('weight', 0)
+        for neighbor in unvisited:
+            # Check if edge exists
+            if graph.has_edge(current_station, neighbor):
+                distance = graph[current_station][neighbor]['weight']
 
-                if travel_time < min_time:
-                    min_time = travel_time
+                if distance < min_distance:
+                    min_distance = distance
                     nearest_station = neighbor
 
-        # Handle disconnected graph (shouldn't happen with validated data)
+        # If no neighbor found, graph is disconnected
         if nearest_station is None:
-            # Find any unvisited station and connect via shortest path
-            unvisited = set(graph.nodes()) - visited
-            if unvisited:
-                # Find closest unvisited via shortest path
-                min_path_length = float('inf')
-                closest_unvisited = None
+            raise ValueError(
+                f"No path from {current_station} to remaining stations. "
+                f"Graph may be disconnected."
+            )
 
-                for unvisited_station in unvisited:
-                    try:
-                        path_length = nx.shortest_path_length(
-                            graph, current_station, unvisited_station, weight='weight'
-                        )
-                        if path_length < min_path_length:
-                            min_path_length = path_length
-                            closest_unvisited = unvisited_station
-                    except nx.NetworkXNoPath:
-                        continue
-
-                if closest_unvisited:
-                    # Add path to tour
-                    path = nx.shortest_path(
-                        graph, current_station, closest_unvisited, weight='weight'
-                    )
-                    # Add intermediate nodes
-                    for i in range(1, len(path)):
-                        if path[i] not in visited:
-                            tour.append(path[i])
-                            visited.add(path[i])
-                            # Add edge weight
-                            edge_data = graph[path[i-1]][path[i]]
-                            total_time += edge_data.get('weight', 0)
-                    current_station = closest_unvisited
-                    continue
-                else:
-                    raise ValueError("Graph is disconnected and no path exists to unvisited stations")
-            else:
-                break
-
-        # Move to nearest neighbor
+        # Visit nearest neighbor
         tour.append(nearest_station)
-        visited.add(nearest_station)
-        total_time += min_time
+        unvisited.remove(nearest_station)
         current_station = nearest_station
 
-    # Return to starting station to complete the tour
-    if current_station != start_station:
-        try:
-            edge_data = graph[current_station][start_station]
-            return_time = edge_data.get('weight', 0)
-            total_time += return_time
-        except KeyError:
-            # If no direct edge, find shortest path back
-            try:
-                path_length = nx.shortest_path_length(
-                    graph, current_station, start_station, weight='weight'
-                )
-                total_time += path_length
-            except nx.NetworkXNoPath:
-                pass  # Single node or disconnected, no return needed
+    # Calculate total tour cost
+    # Handle single-node case specially (no edges to traverse)
+    if len(tour) == 1:
+        total_cost = 0.0
+    else:
+        total_cost = calculate_tour_cost(tour, graph)
 
-    # Always close the loop
-    tour.append(start_station)
+    # Validate result if requested
+    if validate_result and len(tour) > 1:
+        validate_tour(tour, graph, require_complete=True)
 
-    return tour, total_time
+    return tour, total_cost
 
 
-def nearest_neighbor_tsp_with_stats(
+def nearest_neighbor_multi_start(
     graph: nx.Graph,
-    start_station: str
-) -> Tuple[List[str], float, dict]:
+    num_starts: Optional[int] = None,
+    start_stations: Optional[List[str]] = None
+) -> Tuple[List[str], float, str]:
     """
-    Solve TSP using Nearest Neighbor and return additional statistics.
+    Run Nearest Neighbor from multiple starting points and return the best tour.
+
+    This can help overcome the greedy nature of the Nearest Neighbor heuristic
+    by trying different starting positions.
 
     Args:
-        graph: NetworkX graph
-        start_station: Starting station ID
+        graph: NetworkX graph with edge weights
+        num_starts: Number of random starting points to try.
+                   Ignored if start_stations is provided.
+        start_stations: Specific list of starting stations to try.
+                       If None, tries num_starts random stations.
 
     Returns:
-        Tuple of (tour, total_time, stats):
-        - tour: Ordered list of station IDs
-        - total_time: Total travel time in minutes
-        - stats: Dictionary with computation_time_seconds, num_stations
+        Tuple of (best_tour, best_cost, best_start_station)
+        - best_tour: Best tour found
+        - best_cost: Cost of best tour
+        - best_start_station: Starting station that produced best tour
+
+    Raises:
+        ValueError: If graph is empty or parameters are invalid
+
+    Example:
+        >>> G = nx.complete_graph(5)
+        >>> for u, v in G.edges():
+        ...     G[u][v]['weight'] = 1.0
+        >>> tour, cost, start = nearest_neighbor_multi_start(G, num_starts=3)
+        >>> len(tour) == 5
+        True
     """
-    start_time = time.time()
-    tour, total_time = nearest_neighbor_tsp(graph, start_station)
-    computation_time = time.time() - start_time
+    if graph.number_of_nodes() == 0:
+        raise ValueError("Graph is empty")
 
-    stats = {
-        'computation_time_seconds': computation_time,
-        'num_stations': graph.number_of_nodes(),
-        'algorithm': 'Nearest Neighbor',
-        'deterministic': True
-    }
+    # Determine which starting stations to try
+    if start_stations is not None:
+        # Use provided list
+        stations_to_try = start_stations
+        # Validate all stations exist
+        for station in stations_to_try:
+            if station not in graph.nodes():
+                raise ValueError(f"Station '{station}' not in graph")
+    else:
+        # Use num_starts random stations
+        if num_starts is None:
+            num_starts = min(10, graph.number_of_nodes())
 
-    return tour, total_time, stats
+        all_stations = list(graph.nodes())
+        if num_starts > len(all_stations):
+            num_starts = len(all_stations)
+
+        # Try first num_starts stations (deterministic)
+        stations_to_try = all_stations[:num_starts]
+
+    # Try each starting station
+    best_tour = None
+    best_cost = float('inf')
+    best_start = None
+
+    for start_station in stations_to_try:
+        try:
+            tour, cost = nearest_neighbor_tsp(graph, start_station=start_station)
+
+            if cost < best_cost:
+                best_cost = cost
+                best_tour = tour
+                best_start = start_station
+
+        except ValueError:
+            # Skip stations that don't lead to valid tours
+            continue
+
+    if best_tour is None:
+        raise ValueError("Could not find any valid tour")
+
+    return best_tour, best_cost, best_start
+
+
+def nearest_neighbor_with_2opt(
+    graph: nx.Graph,
+    start_station: Optional[str] = None,
+    max_iterations: Optional[int] = None,
+    improvement_threshold: float = 0.001,
+    verbose: bool = False
+) -> Tuple[List[str], float, float]:
+    """
+    Construct a tour with Nearest Neighbor and improve it with 2-opt.
+
+    This combines the construction heuristic with local search optimization
+    to produce better solutions.
+
+    Args:
+        graph: NetworkX graph with edge weights
+        start_station: Starting station for Nearest Neighbor
+        max_iterations: Max 2-opt iterations
+        improvement_threshold: Min improvement for 2-opt to continue
+        verbose: Print progress information
+
+    Returns:
+        Tuple of (optimized_tour, initial_cost, optimized_cost)
+
+    Example:
+        >>> G = nx.Graph()
+        >>> G.add_edge('A', 'B', weight=1.0)
+        >>> G.add_edge('B', 'C', weight=1.0)
+        >>> G.add_edge('C', 'A', weight=1.0)
+        >>> tour, init_cost, final_cost = nearest_neighbor_with_2opt(G)
+        >>> final_cost <= init_cost
+        True
+    """
+    from .two_opt import improve_tour_2opt
+
+    # Generate initial solution with Nearest Neighbor
+    if verbose:
+        print("Generating initial tour with Nearest Neighbor...")
+
+    initial_tour, initial_cost = nearest_neighbor_tsp(
+        graph, start_station=start_station
+    )
+
+    if verbose:
+        print(f"Initial tour cost: {initial_cost:.2f} minutes")
+        print(f"Optimizing with 2-opt...")
+
+    # Improve with 2-opt
+    optimized_tour, _, optimized_cost = improve_tour_2opt(
+        initial_tour,
+        graph,
+        max_iterations=max_iterations,
+        improvement_threshold=improvement_threshold,
+        verbose=verbose
+    )
+
+    if verbose:
+        improvement = initial_cost - optimized_cost
+        pct_improvement = (improvement / initial_cost) * 100
+        print(f"\nFinal Results:")
+        print(f"  Initial cost: {initial_cost:.2f} minutes")
+        print(f"  Optimized cost: {optimized_cost:.2f} minutes")
+        print(f"  Improvement: {improvement:.2f} minutes ({pct_improvement:.2f}%)")
+
+    return optimized_tour, initial_cost, optimized_cost
