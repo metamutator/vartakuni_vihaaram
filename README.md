@@ -142,7 +142,7 @@ print(f"Network diameter: {stats['diameter']} stations")
   - 214 stations (181 unique locations)
   - 277 connections (train + walking)
   - 15 lines (8 MRT + 7 LRT)
-  - **Note:** TE21 (Founders' Memorial) station is built but not operational - trains skip from TE20 to TE22
+  - **Note:** TE21 (Marina South) and TE22A (Founders' Memorial) stations are built but not operational - trains skip directly from TE20 to TE22
 - *(Future cities TBD)*
 
 ## Documentation

@@ -83,7 +83,7 @@ EWL,East-West Line,#009645,mrt
 
 ⚠️ **Walking times are MIXED** (54% from measured source data, 46% estimated). See `WALKING_CONNECTIONS_SOURCE.md` for details.
 
-ℹ️ **TE21 (Founders' Memorial) is SKIPPED**: Station has been built but is not yet operational. Trains currently run directly from TE20 (Marina Bay) to TE22 (Gardens by the Bay). Connection reflects current operations. See `LRT_TE_CONNECTIONS_FIX.md` for details.
+ℹ️ **TE21 (Marina South) and TE22A (Founders' Memorial) are SKIPPED**: Both stations have been built but are not yet operational. Trains currently run directly from TE20 (Marina Bay) to TE22 (Gardens by the Bay), bypassing both unopened stations. Connection reflects current operations. See `LRT_TE_CONNECTIONS_FIX.md` for details.
 
 ## Built Artifacts
 
