@@ -148,7 +148,7 @@
   {
     "id": "US-301",
     "title": "US-301: Nearest Neighbor Heuristic",
-    "body": "**User Story**\n\nAs a **developer**  \nI want to **implement a Nearest Neighbor TSP algorithm**  \nSo that **I can quickly generate a baseline solution**\n\n**Acceptance Criteria**\n\n- [ ] Function accepts graph and starting station\n- [ ] Returns tour (ordered list of stations) and total time\n- [ ] Deterministic results\n- [ ] Runs in < 5 seconds for 189 nodes\n- [ ] Unit tested\n\n**Story Points:** 5  \n**Priority:** High\n",
+    "body": "**User Story**\n\nAs a **developer**  \nI want to **implement a Nearest Neighbor TSP algorithm**  \nSo that **I can quickly generate a baseline solution**\n\n**Acceptance Criteria**\n\n- [x] Function accepts graph and starting station\n- [x] Returns tour (ordered list of stations) and total time\n- [x] Deterministic results\n- [x] Runs in < 5 seconds for 189 nodes\n- [x] Unit tested\n\n**Story Points:** 5  \n**Priority:** High\n\n**Status:** Completed. Implemented greedy nearest neighbor TSP algorithm in src/solvers/nearest_neighbor.py (commit d98469b). Algorithm visits nearest unvisited station until all visited, then returns to start. Deterministic results, runs in < 0.5s for 214 stations. Comprehensive unit tests with 17 test cases covering functionality, performance, determinism, and edge cases. All tests passing.\n",
     "labels": [
       "algorithm",
       "phase-1",

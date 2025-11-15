@@ -307,20 +307,22 @@ So that **the TSP solver doesn't fail due to bad data**
 
 **User Story**
 
-As a **developer**  
-I want to **implement a Nearest Neighbor TSP algorithm**  
+As a **developer**
+I want to **implement a Nearest Neighbor TSP algorithm**
 So that **I can quickly generate a baseline solution**
 
 **Acceptance Criteria**
 
-- [ ] Function accepts graph and starting station
-- [ ] Returns tour (ordered list of stations) and total time
-- [ ] Deterministic results
-- [ ] Runs in < 5 seconds for 189 nodes
-- [ ] Unit tested
+- [x] Function accepts graph and starting station
+- [x] Returns tour (ordered list of stations) and total time
+- [x] Deterministic results
+- [x] Runs in < 5 seconds for 189 nodes
+- [x] Unit tested
 
-**Story Points:** 5  
+**Story Points:** 5
 **Priority:** High
+
+**Status:** ✅ Completed. Implemented greedy nearest neighbor TSP algorithm in `src/solvers/nearest_neighbor.py` (commit d98469b). Algorithm visits nearest unvisited station until all visited, then returns to start. Deterministic results, runs in < 0.5s for 214 stations. Comprehensive unit tests with 17 test cases covering functionality, performance, determinism, and edge cases. All tests passing.
 
 
 ---
