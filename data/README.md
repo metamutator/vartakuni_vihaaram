@@ -56,8 +56,15 @@ EWL,East-West Line,#009645,mrt
 - [x] Inter-station travel times (386 train connections, estimated) - **US-102** ✅
 - [x] Walking transfer times (156 walking connections) - **US-103** ✅
 - [x] Line metadata (colors, names) - **US-104** ✅
+- [ ] Fix disconnected LRT loops and TE extension - **US-108** ⚠️ PENDING
 
-**Epic 1: Data Foundation - COMPLETE** 🎉
+**Epic 1: Data Foundation - IN PROGRESS**
+
+**Known Issues (US-108):**
+- ⚠️ Graph has 6 disconnected components (main network + 5 isolated segments)
+- Missing: STC hub ↔ SE1/SW1 connections (Sengkang LRT loops)
+- Missing: PTC hub ↔ PE1/PW1 connections (Punggol LRT loops)
+- Missing: TE20 ↔ TE22 connection (TE line gap)
 
 ## Current Files
 

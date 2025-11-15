@@ -97,8 +97,52 @@ So that **visualizations can display correct colors and labels**
 - [ ] Covers all MRT and LRT lines
 - [ ] Colors match official LTA branding
 
-**Story Points:** 2  
+**Story Points:** 2
 **Priority:** Low
+
+
+---
+
+## US-108: Fix Disconnected LRT and TE Extension Connections
+
+**Labels:** data-collection, data-fix, phase-1, epic-1, priority-high
+
+**Milestone:** Epic 1: Data Foundation
+
+**User Story**
+
+As a **developer**
+I want to **add missing connections between LRT hub stations and loop stations, and fix TE line gaps**
+So that **the network graph is fully connected and TSP algorithms can traverse all stations**
+
+**Acceptance Criteria**
+
+- [ ] Sengkang LRT connected: STC hub ↔ SE1 (East Loop) and STC hub ↔ SW1 (West Loop)
+- [ ] Punggol LRT connected: PTC hub ↔ PE1 (East Loop) and PTC hub ↔ PW1 (West Loop)
+- [ ] Thomson-East Coast Line connected: TE20 ↔ TE22 (fill TE21 gap or direct connection)
+- [ ] All connections bidirectional with appropriate travel times
+- [ ] Graph connectivity validation passes (single connected component)
+- [ ] Connection type properly labeled (train for LRT loops, appropriate for TE gap)
+
+**Background**
+
+Graph builder (US-201) identified 6 disconnected components:
+1. Main network (179 stations) - ✅ connected
+2. SE (Sengkang East Loop) - 5 stations, disconnected from STC
+3. SW (Sengkang West Loop) - 8 stations, disconnected from STC
+4. PE (Punggol East Loop) - 7 stations, disconnected from PTC
+5. PW (Punggol West Loop) - 7 stations, disconnected from PTC
+6. TE22-TE29 extension - 8 stations, gap between TE20 and TE22
+
+**Technical Details**
+
+Missing connections identified:
+- STC (at NE16 Sengkang) exists with walk_transfer to NE16, but no train connections to SE1/SW1
+- PTC (at NE17 Punggol) exists with walk_transfer to NE17, but no train connections to PE1/PW1
+- TE20 (Marina Bay) exists, TE22 (Gardens by the Bay) exists, but no TE21 or direct link
+
+**Story Points:** 5
+**Priority:** High
 
 
 ---
