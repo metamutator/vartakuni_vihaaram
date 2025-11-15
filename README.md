@@ -20,11 +20,26 @@ Given any starting station in a metro network, calculate the shortest possible r
 
 **Phase 1: MVP Development**
 - [x] Project specification complete
-- [ ] Data collection (Singapore MRT/LRT)
-- [ ] Graph builder implementation
-- [ ] TSP algorithms
-- [ ] Visualization
-- [ ] Quarto site deployment
+- [x] **Epic 1: Data Foundation** - Singapore MRT/LRT network data (214 stations, 277 connections)
+- [x] **Epic 2: Graph Infrastructure** - NetworkX graph builder with validation (US-201)
+- [ ] TSP algorithms (Epic 3)
+- [ ] Visualization (Epic 4)
+- [ ] Quarto site deployment (Epic 5)
+
+### Completed Milestones
+
+**Epic 1: Data Foundation** ✅
+- US-101: Station data collection (214 entries, 181 unique stations)
+- US-102: Inter-station travel times (199 train connections, estimated)
+- US-103: Walking network data (78 walking connections)
+- US-104: Line metadata (15 MRT/LRT lines with official colors)
+- US-108: Fixed disconnected LRT loops and TE extension
+
+**Epic 2: Graph Infrastructure** (In Progress)
+- US-201: Graph builder module ✅
+- US-202: Data validation pipeline (Pending)
+
+**Network Status:** Fully connected graph, ready for TSP algorithms!
 
 ## Project Structure
 
@@ -74,33 +89,68 @@ pip install -r requirements.txt
 
 ## Quick Start
 
-*(Coming soon after implementation)*
+### Build the Singapore MRT/LRT Graph
 
 ```python
-from src.graph.builder import build_network
-from src.solvers.simulated_annealing import solve_tsp
+from pathlib import Path
+from src.graph.builder import build_singapore_metro_graph
 
-# Load Singapore MRT network
-network = build_network("data/processed/singapore_mrt.json")
+# Build the network graph from data files
+data_dir = Path('data/raw')
+graph = build_singapore_metro_graph(data_dir)
 
-# Solve TSP starting from Raffles Place
-route = solve_tsp(network, start_station="RP_NSL")
-
-# Visualize
-from src.visualization.map import plot_route
-plot_route(network, route)
+# View graph statistics
+print(f"Stations: {graph.number_of_nodes()}")
+print(f"Connections: {graph.number_of_edges()}")
 ```
+
+### Use the Graph Builder API
+
+```python
+from src.graph import MetroGraphBuilder
+
+# Create builder instance
+builder = MetroGraphBuilder()
+
+# Build graph from CSV files
+graph = builder.build_graph(
+    stations_csv=Path('data/raw/stations.csv'),
+    connections_csv=Path('data/raw/connections.csv'),
+    lines_csv=Path('data/raw/lines.csv')
+)
+
+# Validate connectivity
+is_connected, components = builder.validate_connectivity()
+print(f"Graph connected: {is_connected}")
+
+# Get shortest path between stations
+path, travel_time = builder.get_shortest_path('NS1', 'EW13')
+print(f"Route: {' → '.join(path)}")
+print(f"Travel time: {travel_time:.2f} minutes")
+
+# Get graph statistics
+stats = builder.get_graph_stats()
+print(f"Network diameter: {stats['diameter']} stations")
+```
+
+**TSP Solvers:** Coming in Epic 3
+**Visualization:** Coming in Epic 4
 
 ## Supported Cities
 
-- **Singapore** (MRT/LRT) - In Progress
+- **Singapore** (MRT/LRT) - ✅ Data Complete, Graph Builder Ready
+  - 214 stations (181 unique locations)
+  - 277 connections (train + walking)
+  - 15 lines (8 MRT + 7 LRT)
+  - **Note:** TE21 (Founders' Memorial) station is built but not operational - trains skip from TE20 to TE22
 - *(Future cities TBD)*
 
 ## Documentation
 
 - [Project Specification](PROJECT_SPEC.md) - Comprehensive functional and technical specs
-- [Data Schema](docs/data_schema.md) - *(Coming soon)*
-- [Algorithm Documentation](docs/algorithms.md) - *(Coming soon)*
+- [Data README](data/README.md) - Complete data collection documentation and statistics
+- [Data Source Documentation](data/raw/) - Detailed methodology for stations, connections, lines, and fixes
+- [Algorithm Documentation](docs/algorithms.md) - *(Coming in Epic 3)*
 
 ## 🧪 Testing
 

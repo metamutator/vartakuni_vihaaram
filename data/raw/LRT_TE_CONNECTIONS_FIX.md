@@ -39,7 +39,12 @@
 **Direct Connection:**
 - TE20 (Marina Bay) ↔ TE22 (Gardens by the Bay): 2.37 min, 1560m
 
-**Rationale:** TE21 has been built but is not yet operational. Trains currently run directly from TE20 to TE22, bypassing the unopened station.
+**Rationale:** **TE21 (Founders' Memorial) station has been built but is not yet operational.** Trains currently run directly from TE20 to TE22, bypassing the unopened station. This connection reflects current operations as of November 2025.
+
+**Important:** When TE21 becomes operational, this connection will need to be replaced with:
+- TE20 ↔ TE21 (new connection)
+- TE21 ↔ TE22 (new connection)
+- Remove: TE20 ↔ TE22 (direct connection)
 
 ## Statistics
 
