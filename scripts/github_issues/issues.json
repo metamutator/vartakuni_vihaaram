@@ -130,32 +130,36 @@
   },
   {
     "id": "US-303",
-    "title": "US-303: Simulated Annealing Solver",
-    "body": "**User Story**\n\nAs a **developer**  \nI want to **implement Simulated Annealing for TSP**  \nSo that **I can explore more of the solution space**\n\n**Acceptance Criteria**\n\n- [ ] Configurable cooling schedule\n- [ ] Random neighbor generation (2-opt swaps)\n- [ ] Accepts or rejects moves based on SA criteria\n- [ ] Returns best tour found\n- [ ] Benchmarked against other algorithms\n\n**Story Points:** 13  \n**Priority:** Medium\n",
+    "title": "US-303: Simulated Annealing Solver ✅",
+    "body": "**User Story**\n\nAs a **developer**\nI want to **implement Simulated Annealing for TSP**\nSo that **I can explore more of the solution space**\n\n**Acceptance Criteria**\n\n- [x] Configurable cooling schedule\n- [x] Random neighbor generation (2-opt swaps)\n- [x] Accepts or rejects moves based on SA criteria\n- [x] Returns best tour found\n- [x] Benchmarked against other algorithms\n\n**Story Points:** 13\n**Priority:** Medium\n**Status:** ✅ COMPLETED\n",
     "labels": [
       "algorithm",
       "phase-1",
       "epic-3",
-      "priority-medium"
+      "priority-medium",
+      "completed"
     ],
     "milestone": "Epic 3: TSP Solver Implementation",
     "story_points": "13",
-    "priority": "Medium"
+    "priority": "Medium",
+    "status": "completed"
   },
   {
     "id": "US-304",
-    "title": "US-304: Genetic Algorithm Solver (Optional)",
-    "body": "**User Story**\n\nAs a **developer**  \nI want to **implement a Genetic Algorithm for TSP**  \nSo that **I can compare population-based optimization**\n\n**Acceptance Criteria**\n\n- [ ] Configurable population size, generations, mutation rate\n- [ ] Crossover operator for TSP tours (e.g., order crossover)\n- [ ] Mutation operator (swap, reverse)\n- [ ] Returns best tour from final population\n\n**Story Points:** 13  \n**Priority:** Low\n",
+    "title": "US-304: Genetic Algorithm Solver (Optional) ✅",
+    "body": "**User Story**\n\nAs a **developer**\nI want to **implement a Genetic Algorithm for TSP**\nSo that **I can compare population-based optimization**\n\n**Acceptance Criteria**\n\n- [x] Configurable population size, generations, mutation rate\n- [x] Crossover operator for TSP tours (e.g., order crossover)\n- [x] Mutation operator (swap, reverse)\n- [x] Returns best tour from final population\n\n**Story Points:** 13\n**Priority:** Low\n**Status:** ✅ COMPLETED\n",
     "labels": [
       "algorithm",
       "phase-1",
       "optional",
       "epic-3",
-      "priority-low"
+      "priority-low",
+      "completed"
     ],
     "milestone": "Epic 3: TSP Solver Implementation",
     "story_points": "13",
-    "priority": "Low"
+    "priority": "Low",
+    "status": "completed"
   },
   {
     "id": "US-305",

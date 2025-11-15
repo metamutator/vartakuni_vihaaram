@@ -235,7 +235,7 @@ So that **I can optimize solutions from constructive heuristics**
 
 ---
 
-## US-303: Simulated Annealing Solver
+## US-303: Simulated Annealing Solver ✅
 
 **Labels:** algorithm, phase-1, epic-3, priority-medium
 
@@ -243,25 +243,26 @@ So that **I can optimize solutions from constructive heuristics**
 
 **User Story**
 
-As a **developer**  
-I want to **implement Simulated Annealing for TSP**  
+As a **developer**
+I want to **implement Simulated Annealing for TSP**
 So that **I can explore more of the solution space**
 
 **Acceptance Criteria**
 
-- [ ] Configurable cooling schedule
-- [ ] Random neighbor generation (2-opt swaps)
-- [ ] Accepts or rejects moves based on SA criteria
-- [ ] Returns best tour found
-- [ ] Benchmarked against other algorithms
+- [x] Configurable cooling schedule
+- [x] Random neighbor generation (2-opt swaps)
+- [x] Accepts or rejects moves based on SA criteria
+- [x] Returns best tour found
+- [x] Benchmarked against other algorithms
 
-**Story Points:** 13  
+**Story Points:** 13
 **Priority:** Medium
+**Status:** ✅ COMPLETED
 
 
 ---
 
-## US-304: Genetic Algorithm Solver (Optional)
+## US-304: Genetic Algorithm Solver (Optional) ✅
 
 **Labels:** algorithm, phase-1, optional, epic-3, priority-low
 
@@ -269,19 +270,20 @@ So that **I can explore more of the solution space**
 
 **User Story**
 
-As a **developer**  
-I want to **implement a Genetic Algorithm for TSP**  
+As a **developer**
+I want to **implement a Genetic Algorithm for TSP**
 So that **I can compare population-based optimization**
 
 **Acceptance Criteria**
 
-- [ ] Configurable population size, generations, mutation rate
-- [ ] Crossover operator for TSP tours (e.g., order crossover)
-- [ ] Mutation operator (swap, reverse)
-- [ ] Returns best tour from final population
+- [x] Configurable population size, generations, mutation rate
+- [x] Crossover operator for TSP tours (e.g., order crossover)
+- [x] Mutation operator (swap, reverse)
+- [x] Returns best tour from final population
 
-**Story Points:** 13  
+**Story Points:** 13
 **Priority:** Low
+**Status:** ✅ COMPLETED
 
 
 ---
