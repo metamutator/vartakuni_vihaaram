@@ -677,12 +677,13 @@ So that **rendered tours match the dataset and exclude unbuilt lines**
 **Acceptance Criteria**
 
 - [ ] Python script `scripts/prune_svg_map.py` reads `data/raw/Singapore_MRT_and_LRT_System_Map.svg`
-- [ ] Filters to stations where `status == operational` from `data/raw/stations.csv`
-- [ ] Uses optional mapping file `data/processed/svg_name_map.csv` to resolve label/name mismatches
+- [ ] Filters to stations where `operational_status == 'active'` from `data/raw/stations.csv`
+- [ ] Uses mapping file `data/processed/svg_name_map.csv` to resolve label/name mismatches and add station IDs to labels
+- [ ] Updates SVG station labels to include station IDs (e.g., "Expo (CG2, DT35)" for multi-line stations)
 - [ ] Removes or hides non-operational stations and segments from the SVG
 - [ ] Writes pruned map to `data/processed/sg_mrt_lrt_built_only.svg`
 - [ ] Preserves CC BY-SA 3.0 attribution within repo and in the output SVG metadata
-- [ ] Generates a report/list of unmatched SVG labels for mapping updates
+- [ ] Exports unmatched SVG labels to `data/processed/unmatched_svg_labels.csv` for manual review and mapping updates
 
 **Story Points:** 5  
 **Priority:** High
@@ -704,7 +705,9 @@ So that **the pruning and overlay scripts can reliably match stations**
 
 **Acceptance Criteria**
 
-- [ ] Create `data/processed/svg_name_map.csv` with columns: `svg_label,station_id`
+- [ ] Create `data/processed/svg_name_map.csv` with columns: `svg_label,station_ids,display_label`
+- [ ] For multi-line interchanges, station_ids contains comma-separated IDs (e.g., "NS24,NE6,CC1")
+- [ ] display_label includes station IDs in format like "Expo (CG2, DT35)" or "Dhoby Ghaut (NS24, NE6, CC1)"
 - [ ] Script `scripts/validate_svg_mapping.py` reports missing/ambiguous mappings and unmatched SVG elements
 - [ ] Mapping covers ≥ 95% of operational stations; remaining listed in a TODO section
 - [ ] Document how to update the mapping in `docs/visualization/svg_map_integration.md`
@@ -729,7 +732,8 @@ So that **I can visually follow the route station by station**
 
 **Acceptance Criteria**
 
-- [ ] Python script `scripts/render_tour_to_svg.py` accepts: pruned SVG path, ordered tour (station IDs), style options
+- [ ] Python script `scripts/render_tour_to_svg.py` accepts: pruned SVG path, ordered tour (list of station IDs like ["NS1", "NS2", "CC1"]), style options
+- [ ] Uses `svg_name_map.csv` to locate station positions in the SVG by matching station IDs
 - [ ] Draws per-segment paths with arrowheads indicating direction
 - [ ] Places step numbers along the path or at stations; start/end markers included
 - [ ] Outputs static SVG per tour to `data/processed/maps/<tour_name>.svg`
