@@ -22,6 +22,7 @@ gh label create "epic-4" --description "Epic 4: Visualization" --color "0E8A16" 
 gh label create "epic-5" --description "Epic 5: Deployment" --color "0E8A16" 2>/dev/null || echo "Label 'epic-5' already exists"
 gh label create "epic-6" --description "Epic 6: Testing" --color "0E8A16" 2>/dev/null || echo "Label 'epic-6' already exists"
 gh label create "epic-7" --description "Epic 7: Future Enhancements" --color "0E8A16" 2>/dev/null || echo "Label 'epic-7' already exists"
+gh label create "epic-8" --description "Epic 8: SVG Map Integration" --color "0E8A16" 2>/dev/null || echo "Label 'epic-8' already exists"
 
 # Priority labels
 gh label create "priority-high" --description "High priority" --color "D93F0B" 2>/dev/null || echo "Label 'priority-high' already exists"
@@ -38,6 +39,7 @@ gh label create "backend" --description "Backend/core logic" --color "1D76DB" 2>
 gh label create "graph" --description "Graph theory and network modeling" --color "006B75" 2>/dev/null || echo "Label 'graph' already exists"
 gh label create "algorithm" --description "TSP and optimization algorithms" --color "B60205" 2>/dev/null || echo "Label 'algorithm' already exists"
 gh label create "visualization" --description "Maps and plotting" --color "E99695" 2>/dev/null || echo "Label 'visualization' already exists"
+gh label create "svg" --description "SVG-specific tasks" --color "0052CC" 2>/dev/null || echo "Label 'svg' already exists"
 gh label create "frontend" --description "User interface" --color "FBCA04" 2>/dev/null || echo "Label 'frontend' already exists"
 gh label create "deployment" --description "Deployment and CI/CD" --color "C5DEF5" 2>/dev/null || echo "Label 'deployment' already exists"
 gh label create "testing" --description "Unit and integration tests" --color "D4C5F9" 2>/dev/null || echo "Label 'testing' already exists"
