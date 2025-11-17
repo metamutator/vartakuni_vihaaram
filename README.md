@@ -22,7 +22,7 @@ Given any starting station in a metro network, calculate the shortest possible r
 - [x] Project specification complete
 - [x] **Epic 1: Data Foundation** - Singapore MRT/LRT network data (214 stations, 277 connections)
 - [x] **Epic 2: Graph Infrastructure** - NetworkX graph builder with validation (US-201)
-- [ ] TSP algorithms (Epic 3)
+- [x] TSP algorithms (Epic 3)
 - [ ] Visualization (Epic 4)
 - [ ] Quarto site deployment (Epic 5)
 
