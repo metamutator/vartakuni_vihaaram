@@ -21,25 +21,41 @@ Given any starting station in a metro network, calculate the shortest possible r
 **Phase 1: MVP Development**
 - [x] Project specification complete
 - [x] **Epic 1: Data Foundation** - Singapore MRT/LRT network data (214 stations, 277 connections)
-- [x] **Epic 2: Graph Infrastructure** - NetworkX graph builder with validation (US-201)
-- [x] TSP algorithms (Epic 3)
-- [ ] Visualization (Epic 4)
-- [ ] Quarto site deployment (Epic 5)
+- [x] **Epic 2: Graph Infrastructure** - NetworkX graph builder with validation 
+- [x] **Epic 3: TSP algorithms**
+- [ ] Visualization (Epic 4, 8) - _Ongoing_ 
+- [ ] Website site deployment (Epic 5)
 
 ### Completed Milestones
 
-**Epic 1: Data Foundation** ✅
-- US-101: Station data collection (214 entries, 181 unique stations)
-- US-102: Inter-station travel times (199 train connections, estimated)
-- US-103: Walking network data (78 walking connections)
-- US-104: Line metadata (15 MRT/LRT lines with official colors)
-- US-108: Fixed disconnected LRT loops and TE extension
+**Epic 1: Data Foundation** 
+- [US-101](https://github.com/metamutator/vartakuni_vihaaram/issues/1): Station data collection (214 entries, 181 unique stations)
+- [US-102](https://github.com/metamutator/vartakuni_vihaaram/issues/2): Inter-station travel times (199 train connections, estimated)
+- [US-103](https://github.com/metamutator/vartakuni_vihaaram/issues/3): Walking network data (78 walking connections)
+- [US-104](https://github.com/metamutator/vartakuni_vihaaram/issues/4): Line metadata (15 MRT/LRT lines with official colours)
+- [US-106](https://github.com/metamutator/vartakuni_vihaaram/issues/31): Fixed disconnected LRT loops and TE extension
+- [US-107](https://github.com/metamutator/vartakuni_vihaaram/issues/32): Travel Time Calibration Based on Field Measurements 
 
-**Epic 2: Graph Infrastructure** (In Progress)
-- US-201: Graph builder module ✅
-- US-202: Data validation pipeline (Pending)
+**Epic 2: Graph Infrastructure** 
+- [US-201](https://github.com/metamutator/vartakuni_vihaaram/issues/5): Graph builder module 
+- [US-202](https://github.com/metamutator/vartakuni_vihaaram/issues/6): Data validation pipeline
 
-**Network Status:** Fully connected graph, ready for TSP algorithms (metric closure enabled in solvers)!
+**Epic 3: Graph Solvers** 
+- [US-301](https://github.com/metamutator/vartakuni_vihaaram/issues/7): Nearest Neighbor Heuristic
+- [US-302](https://github.com/metamutator/vartakuni_vihaaram/issues/8): 2-Opt Local Search
+- [US-303](https://github.com/metamutator/vartakuni_vihaaram/issues/9): Simulated Annealing Solver
+- [US-304](https://github.com/metamutator/vartakuni_vihaaram/issues/10): Genetic Algorithm Solver
+- [US-305](https://github.com/metamutator/vartakuni_vihaaram/issues/11): Algorithm Comparison Framework
+
+**Epic ~4~ 8: Visualisation** (_Ongoing_) 
+Exploring various ways in which the generated tours can be visualised on an MRT map. Stay tuned!
+
+### Current Findings
+We constructed a graph out of the Singapore MRT/LRT system, and ran various algorithms to find the shortest path. 
+
+**Our current finding**: The Nearest Neighbour algorithm with 2-Opt search has given us the best set of results. See the corresponding [Jupyter notebook](https://github.com/metamutator/vartakuni_vihaaram/blob/main/notebooks/epic_3_tsp_solvers_demo.ipynb) for details. 
+
+The fastest path around Singapore involves starting at Harbourfront MRT at travelling through a defined path to return to the station. That will take you roughly 585 minutes. Verifying the results now, stay tuned!
 
 ## Project Structure
 
