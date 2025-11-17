@@ -133,8 +133,8 @@ stats = builder.get_graph_stats()
 print(f"Network diameter: {stats['diameter']} stations")
 ```
 
-**TSP Solvers:** Coming in Epic 3
-**Visualization:** Coming in Epic 4
+- **TSP Solvers:** Coming in Epic 3
+- **Visualization:** Coming in Epic 4
 
 ### Metric Closure Design (Epic 3)
 
