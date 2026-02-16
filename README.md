@@ -152,8 +152,14 @@ print(f"Network diameter: {stats['diameter']} stations")
 - **TSP Solvers:** Coming in Epic 3
 - **Visualization:** Coming in Epic 4
 
-### Metric Closure Design (Epic 3)
+### Important Concepts
 
+**TSP Tours Are Cycles**  
+A TSP tour visiting stations `[A, B, C, D]` is a **cycle** with no inherent starting point. The representations `[A,B,C,D]`, `[B,C,D,A]`, `[C,D,A,B]`, and `[D,A,B,C]` are all equivalent - they're rotations of the same cycle with identical total cost. 
+
+**Implication:** When you request a route "starting from Station X", the algorithm produces an optimal tour but may return it starting from any station in the cycle. The physical route will correctly follow the tour from its first element, which may differ from your requested start. This is mathematically correct, not an error. See `PROJECT_SPEC.md` Section 3.4 (Decision 0) for details.
+
+**Metric Closure Design (Epic 3)**  
 All TSP solvers use the **metric closure** of the transit graph: a complete graph where each edge weight equals the shortest-path travel time between two station nodes (including train travel and walking transfers). This provides:
 - Guaranteed distance between every pair of stations (no dead-ends / leaf branch pitfalls)
 - Consistent cost calculations across heuristics and metaheuristics

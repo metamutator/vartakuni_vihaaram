@@ -1,0 +1,187 @@
+svg_label,station_ids,display_label,x,y
+Admiralty,NS10,Admiralty (NS10),586.0,80.0
+Aljunied,EW9,Aljunied (EW9),945.0,638.0
+Ang,"BP1,NS4","Ang (BP1, NS4)",758.0,317.0
+Bakau,SE3,Bakau (SE3),1157.0,379.0
+Bangkit,BP9,Bangkit (BP9),569.0,251.0
+Bartley,CC12,Bartley (CC12),968.0,514.0
+Bayfront,"CE1,DT16","Bayfront (CE1, DT16)",885.0,888.0
+Bayshore,TE29,Bayshore (TE29),1178.0,782.0
+Beauty World,DT5,Beauty World (DT5),436.0,358.0
+Bedok,EW5,Bedok (EW5),1171.0,652.0
+Bedok North,DT29,Bedok North (DT29),1110.0,562.0
+Bedok South,EW5,Bedok South (EW5),1224.0,746.0
+Bencoolen,DT21,Bencoolen (DT21),780.0,686.0
+Bishan,"CC15,NS17","Bishan (CC15, NS17)",793.0,390.0
+Blangah,CC28,Blangah (CC28),488.0,846.0
+Boon Keng,NE9,Boon Keng (NE9),838.0,564.0
+Boon Lay,EW27,Boon Lay (EW27),122.0,496.0
+Boulevard Orchard,"NS22,TE14","Boulevard Orchard (NS22, TE14)",599.0,558.0
+Braddell,NS18,Braddell (NS18),734.0,432.0
+Bras Basah,CC2,Bras Basah (CC2),830.0,727.0
+Bright,TE7,Bright (TE7),622.0,292.0
+Buangkok,NE15,Buangkok (NE15),962.0,365.0
+Bugis,"DT14,EW12","Bugis (DT14, EW12)",908.0,730.0
+Bukit,"BP6,DT1","Bukit (BP6, DT1)",445.0,240.0
+Bukit Batok,NS2,Bukit Batok (NS2),292.0,411.0
+Bukit Batok West,NS2,Bukit Batok West (NS2),221.0,431.0
+Bukit Gombak,NS3,Bukit Gombak (NS3),292.0,350.0
+Buona Vista,"CC22,EW21","Buona Vista (CC22, EW21)",489.0,600.0
+Caldecott,"CC17,TE9","Caldecott (CC17, TE9)",595.0,399.0
+Canberra,NS12,Canberra (NS12),742.0,108.0
+Canning,DT20,Canning (DT20),662.0,720.0
+Changi Airport,CG2,Changi Airport (CG2),1310.0,687.0
+Cheng Lim,SW1,Cheng Lim (SW1),1071.0,273.0
+Chinatown,"DT19,NE4","Chinatown (DT19, NE4)",702.0,758.0
+Chinese Garden,EW25,Chinese Garden (EW25),224.0,527.0
+Choa,"BP1,NS4","Choa (BP1, NS4)",247.0,213.0
+Chu Kang,"BP1,NS4","Chu Kang (BP1, NS4)",221.0,225.0
+Chu Kang,"BP1,NS4","Chu Kang (BP1, NS4)",727.0,258.0
+City Hall,"EW13,NS25","City Hall (EW13, NS25)",840.0,799.0
+Clarke Quay,NE5,Clarke Quay (NE5),730.0,729.0
+Clementi,EW23,Clementi (EW23),414.0,526.0
+Commonwealth,EW20,Commonwealth (EW20),525.0,636.0
+Compassvale,SE1,Compassvale (SE1),1096.0,315.0
+Cove,PE1,Cove (PE1),1164.0,250.0
+Dakota,CC8,Dakota (CC8),1011.0,674.0
+Damai,PE7,Damai (PE7),1198.0,219.0
+Dhoby Ghaut,"CC1,NE6,NS24","Dhoby Ghaut (CC1, NE6, NS24)",708.0,686.0
+Dover,EW22,Dover (EW22),418.0,581.0
+Downtown,DT17,Downtown (DT17),809.0,865.0
+Esplanade Promenade,CC3,Esplanade Promenade (CC3),872.0,779.0
+Eunos,EW7,Eunos (EW7),1050.0,652.0
+Expo,"CG1,DT35","Expo (CG1, DT35)",1252.0,687.0
+Farmway,SW2,Farmway (SW2),1065.0,246.0
+Farrer Park,NE8,Farrer Park (NE8),810.0,591.0
+Farrer Road,CC20,Farrer Road (CC20),522.0,520.0
+Fernvale Thanggam,SW4,Fernvale Thanggam (SW4),961.0,246.0
+Fort,DT20,Fort (DT20),685.0,708.0
+Geylang Bahru,DT24,Geylang Bahru (DT24),882.0,582.0
+Gul Circle,EW30,Gul Circle (EW30),15.0,546.0
+HarbourFront,"CC29,NE1","HarbourFront (CC29, NE1)",495.0,875.0
+Havelock,TE16,Havelock (TE16),603.0,697.0
+Haw Par Villa,CC25,Haw Par Villa (CC25),490.0,713.0
+Highway,CC5,Highway (CC5),934.0,760.0
+Hill,DT3,Hill (DT3),51.0,335.0
+Hill,DT3,Hill (DT3),637.0,304.0
+Hillview,DT3,Hillview (DT3),433.0,301.0
+Holland Village,CC21,Holland Village (CC21),504.0,556.0
+Hougang,NE14,Hougang (NE14),996.0,403.0
+Hume,DT4,Hume (DT4),442.0,333.0
+Jalan Besar,DT22,Jalan Besar (DT22),874.0,660.0
+Jelapang,BP12,Jelapang (BP12),525.0,186.0
+Jurong East,"EW24,NS1","Jurong East (EW24, NS1)",292.0,495.0
+Kadaloor,PE5,Kadaloor (PE5),1259.0,245.0
+Kallang,EW10,Kallang (EW10),954.0,682.0
+Kangkar,SE4,Kangkar (SE4),1071.0,384.0
+Katong Park,TE24,Katong Park (TE24),1028.0,842.0
+Kembangan,EW6,Kembangan (EW6),1092.0,633.0
+Kent Ridge,CC24,Kent Ridge (CC24),506.719,674.0
+Khatib,NS14,Khatib (NS14),746.0,205.0
+King Albert,DT6,King Albert (DT6),415.0,396.0
+Kovan,NE13,Kovan (NE13),961.0,441.0
+Kranji,NS7,Kranji (NS7),335.5,80.0
+Kupang,SW3,Kupang (SW3),1048.0,228.0
+Labrador,CC27,Labrador (CC27),458.0,798.0
+Lakeside,EW26,Lakeside (EW26),178.0,508.0
+Laluan Circle (Lingkaran) (CCL) CCL6 Laluan Downtown (Pusat Bandar) (DTL),DT17,Laluan Circle (Lingkaran) (CCL) CCL6 Laluan Downtown (Pusat Bandar) (DTL) (DT17),20.0,748.5
+Laluan Rentas Pulau (CRL) CRL1 CPE : Pasir Ris - Punggol (2032),EW1,Laluan Rentas Pulau (CRL) CRL1 CPE : Pasir Ris - Punggol (2032) (EW1),20.0,903.5
+Lavender,EW11,Lavender (EW11),875.0,693.0
+Lentor,TE5,Lentor (TE5),665.0,212.0
+Lorong Chuan,CC14,Lorong Chuan (CC14),879.0,413.0
+MacPherson,"CC10,DT26","MacPherson (CC10, DT26)",1001.0,594.0
+Marina,"CE2,NS27,TE20","Marina (CE2, NS27, TE20)",745.0,972.0
+Marina Bay,"CE2,NS27,TE20","Marina Bay (CE2, NS27, TE20)",789.0,895.0
+Marina South,NS28,Marina South (NS28),818.0,968.0
+Marsiling,NS8,Marsiling (NS8),410.0,80.0
+Marymount,CC16,Marymount (CC16),690.0,383.0
+Mattar,DT25,Mattar (DT25),951.5,595.0
+Maxwell,TE18,Maxwell (TE18),694.0,827.0
+Mayflower,TE6,Mayflower (TE6),665.0,250.0
+Meridian Coral Edge,PE2,Meridian Coral Edge (PE2),1154.0,275.0
+Mo Kio,NS16,Mo Kio (NS16),742.0,329.0
+Mountbatten,CC7,Mountbatten (CC7),1008.0,700.0
+Napier,TE12,Napier (TE12),617.0,520.0
+Newton,"DT11,NS21","Newton (DT11, NS21)",714.0,536.0
+Nibong Sumang,PW5,Nibong Sumang (PW5),1063.0,181.0
+Nicoll,CC5,Nicoll (CC5),950.0,748.0
+Novena,NS20,Novena (NS20),748.0,504.0
+Oasis,PE6,Oasis (PE6),1243.0,229.0
+Orchard,"NS22,TE14","Orchard (NS22, TE14)",604.0,590.0
+Outram,"EW16,NE3,TE17","Outram (EW16, NE3, TE17)",605.0,782.0
+Panjang,"BP6,DT1","Panjang (BP6, DT1)",442.0,770.0
+Panjang Cashew,DT2,Panjang Cashew (DT2),429.0,252.0
+Park,CC27,Park (CC27),450.0,408.0
+Park,CC27,Park (CC27),483.0,810.0
+Park,CC27,Park (CC27),621.0,794.0
+Park,CC27,Park (CC27),1360.0,661.0
+Pasir,CC26,Pasir (CC26),458.0,758.0
+Pasir Ris,EW1,Pasir Ris (EW1),1289.0,522.0
+Pasir Ris East,EW1,Pasir Ris East (EW1),1321.0,554.0
+Paya Lebar,"CC9,EW8","Paya Lebar (CC9, EW8)",1010.0,621.0
+Pending,BP8,Pending (BP8),525.0,272.0
+Petir,BP7,Petir (BP7),525.0,242.0
+Phoenix,BP5,Phoenix (BP5),407.0,221.0
+Pioneer,EW28,Pioneer (EW28),100.0,527.0
+Potong Pasir,NE10,Potong Pasir (NE10),867.0,532.0
+Punggol Coast,NE18,Punggol Coast (NE18),1264.0,132.0
+Punggol Point,PW3,Punggol Point (PW3),1145.0,131.0
+Punggol Teck,"NE17,PTC","Punggol Teck (NE17, PTC)",1117.0,215.0
+Queenstown,EW19,Queenstown (EW19),561.0,672.5
+Raffles Place,"EW14,NS26","Raffles Place (EW14, NS26)",808.0,831.0
+Ranggung,SE5,Ranggung (SE5),1045.0,354.0
+Redhill,EW18,Redhill (EW18),554.0,721.0
+Reservoir Bedok,EW5,Reservoir Bedok (EW5),1149.0,607.0
+Riviera,PE4,Riviera (PE4),1252.0,282.0
+Road,CC20,Road (CC20),39.0,608.0
+Rochor,DT13,Rochor (DT13),775.0,655.0
+Rumbia,SE2,Rumbia (SE2),1155.0,335.0
+Sam Kee,PW1,Sam Kee (PW1),1166.0,177.0
+Samudera,PW4,Samudera (PW4),1056.0,142.0
+Segar Fajar,BP10,Segar Fajar (BP10),569.0,207.0
+Sembawang,NS11,Sembawang (NS11),650.0,80.0
+Sengkang Renjong,"NE16,STC","Sengkang Renjong (NE16, STC)",1013.0,309.0
+Senja,BP13,Senja (BP13),525.0,215.0
+Serangoon,"CC13,NE12","Serangoon (CC13, NE12)",933.0,468.0
+Serangoon North,"CC13,NE12","Serangoon North (CC13, NE12)",924.0,334.0
+Shenton Way,TE19,Shenton Way (TE19),736.0,863.0
+Siglap,TE28,Siglap (TE28),1147.0,758.0
+Simei,EW3,Simei (EW3),1209.0,617.0
+Sixth Avenue,DT7,Sixth Avenue (DT7),503.0,407.0
+Somerset,NS23,Somerset (NS23),709.0,634.0
+Soo,PW7,Soo (PW7),1131.0,182.0
+South Pier,NS28,South Pier (NS28),724.0,984.0
+South View,BP2,South View (BP2),307.0,211.0
+Springleaf,TE4,Springleaf (TE4),632.0,163.0
+Stadium,CC6,Stadium (CC6),1004.0,726.0
+Stevens,"DT10,TE11","Stevens (DT10, TE11)",664.0,484.0
+Sungei Bedok,EW5,Sungei Bedok (EW5),1269.0,782.0
+Tai Seng,CC11,Tai Seng (CC11),989.0,556.0
+Tampines,"DT32,EW2","Tampines (DT32, EW2)",1250.0,574.0
+Tampines East,DT33,Tampines East (DT33),1292.0,609.0
+Tampines North,"DT32,EW2","Tampines North (DT32, EW2)",1183.0,501.0
+Tampines West,DT31,Tampines West (DT31),1184.0,562.0
+Tan Kah Kee,DT8,Tan Kah Kee (DT8),529.0,434.0
+Tanah Merah,"CG,EW4","Tanah Merah (CG, EW4)",1235.0,650.0
+Tanjong Katong,TE25,Tanjong Katong (TE25),995.0,788.0
+Tanjong Pagar,EW15,Tanjong Pagar (EW15),650.0,857.0
+Tanjong Rhu,TE23,Tanjong Rhu (TE23),1000.0,879.0
+Teck Lee,PW2,Teck Lee (PW2),1162.0,150.0
+Telok,CC28,Telok (CC28),504.0,834.0
+Telok Ayer,DT18,Telok Ayer (DT18),747.0,789.0
+Thomson,TE8,Thomson (TE8),604.0,366.0
+Tiong Bahru,EW17,Tiong Bahru (EW17),623.488,753.0
+Toa Payoh,NS19,Toa Payoh (NS19),779.0,473.0
+Tongkang Layar,SW6,Tongkang Layar (SW6),973.0,293.0
+Tuas,EW31,Tuas (EW31),41.0,566.0
+Tuas West Tuas Link Crescent,EW33,Tuas West Tuas Link Crescent (EW33),10.0,596.0
+Ubi,DT27,Ubi (DT27),1036.0,575.0
+Upper,DT34,Upper (DT34),621.0,354.0
+Upper Changi,DT34,Upper Changi (DT34),1292.0,643.0
+Woodlands,"NS9,TE2","Woodlands (NS9, TE2)",480.0,100.0
+Woodlands North,TE1,Woodlands North (TE1),450.0,29.0
+Woodlands South,TE3,Woodlands South (TE3),596.0,119.0
+Woodleigh,NE11,Woodleigh (NE11),893.0,509.0
+Yew Tee,NS5,Yew Tee (NS5),292.0,175.0
+Yio,NS15,Yio (NS15),763.0,246.0
+Yishun,NS13,Yishun (NS13),730.0,151.0
