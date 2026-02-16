@@ -1,3 +1,22 @@
+def rotate_tour_to_start(tour: List[str], start_station: str) -> List[str]:
+    """
+    Rotate a TSP tour (cycle) so that it starts at the specified station.
+
+    Args:
+        tour: List of station IDs representing the tour (cycle)
+        start_station: Station ID to rotate the tour to start from
+
+    Returns:
+        Rotated tour list starting at start_station (if present), else original tour
+    """
+    if not tour:
+        return tour
+    try:
+        idx = tour.index(start_station)
+        return tour[idx:] + tour[:idx]
+    except ValueError:
+        # start_station not in tour; return as is
+        return tour
 """Utility functions for TSP tour manipulation and evaluation."""
 
 import networkx as nx

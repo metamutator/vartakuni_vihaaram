@@ -227,6 +227,32 @@ line_code, line_name, color_hex, line_type
 
 ### 3.4 Key Design Decisions
 
+#### Decision 0: TSP Tour Representation (Cycles and Starting Points)
+**Important Concept:** TSP tours are **cycles** with no inherent starting point.
+
+A tour visiting stations `[A, B, C, D]` returning to `A` is mathematically equivalent to:
+- `[A, B, C, D]` → A (starts from A)
+- `[B, C, D, A]` → B (starts from B)
+- `[C, D, A, B]` → C (starts from C)
+- `[D, A, B, C]` → D (starts from D)
+
+All representations have the **same total cost** and visit stations in the **same order** - they're just rotations of the same cycle.
+
+**Implementation Implications:**
+1. **Algorithm Output:** TSP solvers may return tours starting from any station in the cycle, not necessarily the requested starting station. This is mathematically correct.
+2. **User Display:** When showing results to users, we may need to "rotate" the tour list to begin with the user's requested station for clarity.
+3. **Route Comparison:** When comparing tours from different starting stations, the actual station sequence matters, not just the list order.
+4. **Physical Route Expansion:** The `build_physical_route()` utility expands the tour using the first station in the list as the starting point, which may differ from the algorithm's input parameter.
+
+**Example from Testing:**
+- User requests: "Start from NE1 (HarbourFront)"
+- Algorithm produces optimal tour with cost 580.52 min
+- Tour may be represented as `[TE2, TE3, ..., TE1]` (starting from TE2)
+- Physical route correctly begins at TE2 (Woodlands)
+- This is **not an error** - the tour is the same cycle, just represented differently
+
+**Best Practice:** Documentation and UI should clarify that "starting station" determines the algorithm's initial construction, but the returned tour is a cycle that can begin at any point. For user-facing displays, rotate the tour to match requested start for consistency.
+
 #### Decision 1: Pre-computation vs. Real-time Computation
 **Options:**
 - **A:** Pre-compute routes for all 189 starting stations, embed in static site
